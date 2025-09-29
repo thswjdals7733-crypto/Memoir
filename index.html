@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>학생 개인 프로필 · Glide Web Embed Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <style>
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:#f9fafb; color:#111827; }
+    header { padding:36px 20px 8px; text-align:center; }
+    header h1 { margin:0; font-size:26px; }
+    header p { margin:6px 0 0; color:#6b7280; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; padding:20px; max-width:1200px; margin:0 auto; }
+    .card { background:#fff; border-radius:18px; padding:28px; box-shadow:0 8px 22px rgba(0,0,0,0.08); text-align:center; min-height:220px; display:flex; flex-direction:column; justify-content:center; 
+      opacity:0; transform:translateY(30px); transition:all .6s ease; }
+    .card.aos-animate { opacity:1; transform:translateY(0); }
+    .card h2 { margin:0 0 12px; font-size:20px; color:#374151; }
+    .card p { margin:0; font-size:18px; }
+    footer { text-align:center; padding:30px 20px; font-size:13px; color:#9ca3af; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="name">학생 이름</h1>
+    <p>개인화된 학습/생활 데이터</p>
+  </header>
+
+  <section class="grid">
+    <div class="card" data-aos><h2>캠퍼스</h2><p id="campus"></p></div>
+    <div class="card" data-aos><h2>반명</h2><p id="class"></p></div>
+
+    <div class="card" data-aos><h2>총 학생 수</h2><p id="totalStudents"></p></div>
+    <div class="card" data-aos><h2>캠퍼스 학생 수</h2><p id="campusStudents"></p></div>
+    <div class="card" data-aos><h2>반 학생 수</h2><p id="classStudents"></p></div>
+
+    <div class="card" data-aos><h2>총 일수</h2><p id="days"></p></div>
+    <div class="card" data-aos><h2>총 끼니</h2><p id="meals"></p></div>
+    <div class="card" data-aos><h2>인기 메뉴</h2><p id="menu"></p></div>
+
+    <div class="card" data-aos><h2>총 공부 시간</h2><p id="time"></p></div>
+    <div class="card" data-aos><h2>자습 시간</h2><p id="self"></p></div>
+    <div class="card" data-aos><h2>수업 시간</h2><p id="classTime"></p></div>
+
+    <div class="card" data-aos><h2>총 질문 수</h2><p id="totalAsk"></p></div>
+    <div class="card" data-aos><h2>개인 질문 수</h2><p id="personalAsk"></p></div>
+
+    <div class="card" data-aos><h2>등원 시각</h2><p id="start"></p></div>
+    <div class="card" data-aos><h2>하원 시각</h2><p id="end"></p></div>
+    <div class="card" data-aos><h2>집중도</h2><p id="focus"></p></div>
+
+    <div class="card" data-aos><h2>국어</h2><p><span id="korSimul"></span>/<span id="korTotal"></span></p></div>
+    <div class="card" data-aos><h2>수학</h2><p><span id="mathSimul"></span>/<span id="mathTotal"></span></p></div>
+    <div class="card" data-aos><h2>영어</h2><p><span id="engSimul"></span>/<span id="engTotal"></span></p></div>
+    <div class="card" data-aos><h2>생명</h2><p><span id="bioSimul"></span>/<span id="bioTotal"></span></p></div>
+    <div class="card" data-aos><h2>지구</h2><p><span id="geoSimul"></span>/<span id="geoTotal"></span></p></div>
+
+    <div class="card" data-aos><h2>총 문제 수</h2><p id="totalQ"></p></div>
+  </section>
+
+  <footer>개인화된 데이터 · Web Embed Demo with AOS</footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const get = (k,d='') => params.get(k) || d;
+    const set = (id,key,suffix='') => {
+      const el=document.getElementById(id);
+      if(el) el.textContent = get(key) + suffix;
+    };
+    set('name','name');
+    set('campus','campus');
+    set('class','class');
+    set('totalStudents','totalStudents','명');
+    set('campusStudents','campusStudents','명');
+    set('classStudents','classStudents','명');
+    set('days','days','일');
+    set('meals','meals','끼니');
+    set('menu','menu');
+    set('time','time','시간');
+    set('self','self','시간');
+    set('classTime','classTime','시간');
+    set('totalAsk','totalAsk','개');
+    set('personalAsk','personalAsk','개');
+    set('start','start');
+    set('end','end');
+    set('focus','focus');
+    set('korSimul','korSimul'); set('korTotal','korTotal');
+    set('mathSimul','mathSimul'); set('mathTotal','mathTotal');
+    set('engSimul','engSimul'); set('engTotal','engTotal');
+    set('bioSimul','bioSimul'); set('bioTotal','bioTotal');
+    set('geoSimul','geoSimul'); set('geoTotal','geoTotal');
+    set('totalQ','totalQ','문제');
+    AOS.init({offset:100,duration:700,easing:'ease-out',once:false});
+  </script>
+</body>
+</html>
