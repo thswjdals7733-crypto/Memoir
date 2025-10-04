@@ -3,64 +3,698 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>학생 개인 프로필 · Glide Web Embed Demo</title>
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <title>Memoir | 시대인재 - 학생 성취 대시보드</title>
+  
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
+  
   <style>
-    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:#f9fafb; color:#111827; }
-    header { padding:36px 20px 8px; text-align:center; }
-    header h1 { margin:0; font-size:26px; }
-    header p { margin:6px 0 0; color:#6b7280; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; padding:20px; max-width:1200px; margin:0 auto; }
-    .card { background:#fff; border-radius:18px; padding:28px; box-shadow:0 8px 22px rgba(0,0,0,0.08); text-align:center; min-height:220px; display:flex; flex-direction:column; justify-content:center; 
-      opacity:0; transform:translateY(30px); transition:all .6s ease; }
-    .card.aos-animate { opacity:1; transform:translateY(0); }
-    .card h2 { margin:0 0 12px; font-size:20px; color:#374151; }
-    .card p { margin:0; font-size:18px; }
-    footer { text-align:center; padding:30px 20px; font-size:13px; color:#9ca3af; }
+    * {
+      font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    }
+    
+    /* 모노톤 스타일 컬러 팔레트 */
+    :root {
+      --sdij-primary: #000000;
+      --sdij-secondary: #404040;
+      --sdij-accent: #666666;
+      --sdij-gray-50: #fafafa;
+      --sdij-gray-100: #f5f5f5;
+      --sdij-gray-200: #e5e5e5;
+      --sdij-gray-300: #d4d4d4;
+      --sdij-gray-400: #a3a3a3;
+      --sdij-gray-500: #737373;
+      --sdij-gray-600: #525252;
+      --sdij-gray-700: #404040;
+      --sdij-gray-800: #262626;
+      --sdij-gray-900: #171717;
+    }
+    
+    .sdij-gradient {
+      background: linear-gradient(135deg, var(--sdij-primary) 0%, var(--sdij-secondary) 100%);
+    }
+    
+    .sdij-card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--sdij-gray-200);
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sdij-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: var(--sdij-secondary);
+    }
+    
+    .sdij-header {
+      background: white;
+      border-bottom: 1px solid var(--sdij-gray-200);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sdij-nav-link {
+      color: var(--sdij-gray-700);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .sdij-nav-link:hover {
+      color: var(--sdij-primary);
+    }
+    
+    .sdij-nav-link.active {
+      color: var(--sdij-primary);
+    }
+    
+    .sdij-hero {
+      background: linear-gradient(135deg, var(--sdij-primary) 0%, var(--sdij-secondary) 100%);
+      position: relative;
+    }
+    
+    .sdij-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+    
+    .sdij-section {
+      background: var(--sdij-gray-50);
+    }
+    
+    .sdij-section-alt {
+      background: white;
+    }
+    
+    .sdij-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sdij-icon.primary { background: var(--sdij-primary); color: white; }
+    .sdij-icon.secondary { background: var(--sdij-secondary); color: white; }
+    .sdij-icon.accent { background: var(--sdij-accent); color: white; }
+    .sdij-icon.success { background: var(--sdij-gray-700); color: white; }
+    .sdij-icon.warning { background: var(--sdij-gray-600); color: white; }
+    .sdij-icon.info { background: var(--sdij-gray-500); color: white; }
+    
+    .sdij-title {
+      color: var(--sdij-gray-800);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .sdij-subtitle {
+      color: var(--sdij-gray-600);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    
+    .sdij-value {
+      font-weight: 700;
+      font-size: 1.875rem;
+      margin-top: 0.5rem;
+    }
+    
+    .scroll-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 3rem;
+      height: 3rem;
+      background: var(--sdij-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+    }
+    
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-to-top:hover {
+      transform: scale(1.1);
+      background: var(--sdij-secondary);
+      box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
+    }
+    
+    .sdij-footer {
+      background: var(--sdij-gray-800);
+      border-top: 1px solid var(--sdij-gray-700);
+    }
+    
+    .sdij-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      background: var(--sdij-gray-100);
+      color: var(--sdij-gray-700);
+      border: 1px solid var(--sdij-gray-200);
+    }
+    
+    .sdij-badge.primary {
+      background: var(--sdij-primary);
+      color: white;
+      border-color: var(--sdij-primary);
+    }
+    
+    .sdij-badge.secondary {
+      background: var(--sdij-secondary);
+      color: white;
+      border-color: var(--sdij-secondary);
+    }
   </style>
 </head>
-<body>
-  <header>
-    <h1 id="name">학생 이름</h1>
-    <p>개인화된 학습/생활 데이터</p>
+<body class="bg-gray-50">
+  <!-- Fixed Header -->
+  <header class="fixed top-0 w-full z-50 sdij-header">
+    <nav class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 sdij-gradient rounded-xl flex items-center justify-center">
+            <i class="fas fa-graduation-cap text-white text-xl"></i>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-800">Memoir</h1>
+            <p class="text-sm text-gray-500">시대인재 학생 대시보드</p>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#basic" class="sdij-nav-link">기본 정보</a>
+          <a href="#students" class="sdij-nav-link">학생 현황</a>
+          <a href="#life" class="sdij-nav-link">생활 관리</a>
+          <a href="#study" class="sdij-nav-link">학습 현황</a>
+          <a href="#subjects" class="sdij-nav-link">과목별 성취</a>
+        </div>
+        <div class="md:hidden">
+          <button class="text-gray-600 hover:text-gray-800">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
   </header>
 
-  <section class="grid">
-    <div class="card" data-aos><h2>캠퍼스</h2><p id="campus"></p></div>
-    <div class="card" data-aos><h2>반명</h2><p id="class"></p></div>
+  <!-- Main Content -->
+  <main class="pt-20">
+    <!-- Hero Section -->
+    <section class="py-20 sdij-hero relative">
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+          <div data-aos="fade-up">
+            <div class="mb-6">
+              <span class="sdij-badge primary text-sm px-4 py-2">학생 성취 대시보드</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6" id="name">학생 이름</h1>
+            <p class="text-xl text-white/90 mb-8">시대인재에서의 학습 현황과 성취를 한눈에 확인하세요</p>
+            <div class="flex flex-wrap justify-center gap-4 text-white/80">
+              <div class="flex items-center gap-2">
+                <i class="fas fa-building text-sm"></i>
+                <span class="text-sm">캠퍼스: <span id="campus">-</span></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fas fa-users text-sm"></i>
+                <span class="text-sm">반: <span id="class">-</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card" data-aos><h2>총 학생 수</h2><p id="totalStudents"></p></div>
-    <div class="card" data-aos><h2>캠퍼스 학생 수</h2><p id="campusStudents"></p></div>
-    <div class="card" data-aos><h2>반 학생 수</h2><p id="classStudents"></p></div>
+    <!-- Memoir Message Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-white p-12 rounded-lg shadow-sm border border-gray-100" data-aos="fade-up">
+            <div class="text-center mb-8">
+              <h2 class="text-2xl font-bold text-gray-800 mb-4">부엉이 여러분, 수고 많으셨습니다.</h2>
+            </div>
+            
+            <div class="text-gray-700 leading-relaxed space-y-4 text-left">
+              <p class="text-lg">
+                학생님이 달려온 시간을 회고하는 <span class="font-bold text-gray-800">[Memoir]</span>
+              </p>
+              
+              <p class="text-base text-gray-600 italic">
+                📝 'memoir'는 유명인의 회고록이라는 뜻을 지녔습니다.
+              </p>
+              
+              <p class="text-base leading-lax">
+                시대인재는 여러분 하나하나를 존중하고, 여러분이 시대인재와 함께한 시간의 가치를 간과하지 않기에 그동안 달려온 시간을 회고해보고자 했습니다.
+              </p>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-100">
+              <div class="text-center">
+                <span class="sdij-badge secondary text-sm px-4 py-2">
+                  <i class="fas fa-heart mr-2"></i>
+                  시대인재와 함께한 소중한 시간
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card" data-aos><h2>총 일수</h2><p id="days"></p></div>
-    <div class="card" data-aos><h2>총 끼니</h2><p id="meals"></p></div>
-    <div class="card" data-aos><h2>인기 메뉴</h2><p id="menu"></p></div>
+    <!-- Basic Info Section -->
+    <section id="basic" class="py-16 sdij-section-alt">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">기본 정보</h2>
+            <p class="sdij-subtitle">학생의 기본 정보와 소속 정보를 확인할 수 있습니다</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <!-- Campus Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-center">
+                <div class="sdij-icon primary mx-auto">
+                  <i class="fas fa-building"></i>
+                </div>
+                <h3 class="sdij-title">캠퍼스</h3>
+                <p class="sdij-value text-gray-800" id="campus">-</p>
+              </div>
+            </div>
 
-    <div class="card" data-aos><h2>총 공부 시간</h2><p id="time"></p></div>
-    <div class="card" data-aos><h2>자습 시간</h2><p id="self"></p></div>
-    <div class="card" data-aos><h2>수업 시간</h2><p id="classTime"></p></div>
+            <!-- Class Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center">
+                <div class="sdij-icon secondary mx-auto">
+                  <i class="fas fa-users"></i>
+                </div>
+                <h3 class="sdij-title">반명</h3>
+                <p class="sdij-value text-gray-800" id="class">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card" data-aos><h2>총 질문 수</h2><p id="totalAsk"></p></div>
-    <div class="card" data-aos><h2>개인 질문 수</h2><p id="personalAsk"></p></div>
+    <!-- Students Section -->
+    <section id="students" class="py-16 sdij-section">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">학생 현황</h2>
+            <p class="sdij-subtitle">전체, 캠퍼스, 반별 학생 수 통계를 확인할 수 있습니다</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Total Students Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-center">
+                <div class="sdij-icon primary mx-auto">
+                  <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="sdij-title">총 학생 수</h3>
+                <p class="sdij-value text-gray-800" id="totalStudents">-</p>
+              </div>
+            </div>
 
-    <div class="card" data-aos><h2>등원 시각</h2><p id="start"></p></div>
-    <div class="card" data-aos><h2>하원 시각</h2><p id="end"></p></div>
-    <div class="card" data-aos><h2>집중도</h2><p id="focus"></p></div>
+            <!-- Campus Students Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center">
+                <div class="sdij-icon secondary mx-auto">
+                  <i class="fas fa-school"></i>
+                </div>
+                <h3 class="sdij-title">캠퍼스 학생 수</h3>
+                <p class="sdij-value text-gray-800" id="campusStudents">-</p>
+              </div>
+            </div>
 
-    <div class="card" data-aos><h2>국어</h2><p><span id="korSimul"></span>/<span id="korTotal"></span></p></div>
-    <div class="card" data-aos><h2>수학</h2><p><span id="mathSimul"></span>/<span id="mathTotal"></span></p></div>
-    <div class="card" data-aos><h2>영어</h2><p><span id="engSimul"></span>/<span id="engTotal"></span></p></div>
-    <div class="card" data-aos><h2>생명</h2><p><span id="bioSimul"></span>/<span id="bioTotal"></span></p></div>
-    <div class="card" data-aos><h2>지구</h2><p><span id="geoSimul"></span>/<span id="geoTotal"></span></p></div>
+            <!-- Class Students Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="300">
+              <div class="text-center">
+                <div class="sdij-icon accent mx-auto">
+                  <i class="fas fa-user-friends"></i>
+                </div>
+                <h3 class="sdij-title">반 학생 수</h3>
+                <p class="sdij-value text-gray-800" id="classStudents">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card" data-aos><h2>총 문제 수</h2><p id="totalQ"></p></div>
-  </section>
+    <!-- Life Management Section -->
+    <section id="life" class="py-16 sdij-section-alt">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">생활 관리</h2>
+            <p class="sdij-subtitle">일상 생활과 식사 관련 통계를 확인할 수 있습니다</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Days Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-center">
+                <div class="sdij-icon accent mx-auto">
+                  <i class="fas fa-calendar-days"></i>
+                </div>
+                <h3 class="sdij-title">총 일수</h3>
+                <p class="sdij-value text-gray-800" id="days">-</p>
+              </div>
+            </div>
 
-  <footer>개인화된 데이터 · Web Embed Demo with AOS</footer>
+            <!-- Meals Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center">
+                <div class="sdij-icon success mx-auto">
+                  <i class="fas fa-utensils"></i>
+                </div>
+                <h3 class="sdij-title">총 끼니</h3>
+                <p class="sdij-value text-gray-800" id="meals">-</p>
+              </div>
+            </div>
 
+            <!-- Menu Card -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="300">
+              <div class="text-center">
+                <div class="sdij-icon warning mx-auto">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="sdij-title">인기 메뉴</h3>
+                <p class="sdij-value text-gray-800" id="menu">-</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Management -->
+          <div class="text-center mb-8" data-aos="fade-up">
+            <h3 class="text-2xl font-bold sdij-title mb-8">시간 관리</h3>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Total Study Time -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-center">
+                <div class="sdij-icon primary mx-auto">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="sdij-title">총 공부 시간</h3>
+                <p class="sdij-value text-gray-800" id="time">-</p>
+              </div>
+            </div>
+
+            <!-- Self Study Time -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center">
+                <div class="sdij-icon secondary mx-auto">
+                  <i class="fas fa-book-open"></i>
+                </div>
+                <h3 class="sdij-title">자습 시간</h3>
+                <p class="sdij-value text-gray-800" id="self">-</p>
+              </div>
+            </div>
+
+            <!-- Class Time -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="300">
+              <div class="text-center">
+                <div class="sdij-icon info mx-auto">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 class="sdij-title">수업 시간</h3>
+                <p class="sdij-value text-gray-800" id="classTime">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Study Section -->
+    <section id="study" class="py-16 sdij-section">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">학습 현황</h2>
+            <p class="sdij-subtitle">질문, 출석, 집중도 관련 통계를 확인할 수 있습니다</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Total Questions -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-center">
+                <div class="sdij-icon warning mx-auto">
+                  <i class="fas fa-question-circle"></i>
+                </div>
+                <h3 class="sdij-title">총 질문 수</h3>
+                <p class="sdij-value text-gray-800" id="totalAsk">-</p>
+              </div>
+            </div>
+
+            <!-- Personal Questions -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center">
+                <div class="sdij-icon primary mx-auto">
+                  <i class="fas fa-user-question"></i>
+                </div>
+                <h3 class="sdij-title">개인 질문 수</h3>
+                <p class="sdij-value text-gray-800" id="personalAsk">-</p>
+              </div>
+            </div>
+
+            <!-- Focus Level -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="300">
+              <div class="text-center">
+                <div class="sdij-icon success mx-auto">
+                  <i class="fas fa-bullseye"></i>
+                </div>
+                <h3 class="sdij-title">집중도</h3>
+                <p class="sdij-value text-gray-800" id="focus">-</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Daily Schedule -->
+          <div class="text-center mb-8" data-aos="fade-up">
+            <h3 class="text-2xl font-bold sdij-title mb-8">일일 스케줄</h3>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Start Time -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-center">
+                <div class="sdij-icon info mx-auto">
+                  <i class="fas fa-sun"></i>
+                </div>
+                <h3 class="sdij-title">등원 시각</h3>
+                <p class="sdij-value text-gray-800" id="start">-</p>
+              </div>
+            </div>
+
+            <!-- End Time -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center">
+                <div class="sdij-icon secondary mx-auto">
+                  <i class="fas fa-moon"></i>
+                </div>
+                <h3 class="sdij-title">하원 시각</h3>
+                <p class="sdij-value text-gray-800" id="end">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="py-16 sdij-section-alt">
+      <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">과목별 성취</h2>
+            <p class="sdij-subtitle">각 과목의 모의고사 성취도를 확인할 수 있습니다</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Korean -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="100">
+              <div class="text-center">
+                <div class="sdij-icon primary mx-auto">
+                  <i class="fas fa-book"></i>
+                </div>
+                <h3 class="sdij-title">국어</h3>
+                <p class="sdij-value text-gray-800">
+                  <span id="korSimul">-</span>/<span id="korTotal">-</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Math -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="200">
+              <div class="text-center">
+                <div class="sdij-icon secondary mx-auto">
+                  <i class="fas fa-calculator"></i>
+                </div>
+                <h3 class="sdij-title">수학</h3>
+                <p class="sdij-value text-gray-800">
+                  <span id="mathSimul">-</span>/<span id="mathTotal">-</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- English -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="300">
+              <div class="text-center">
+                <div class="sdij-icon success mx-auto">
+                  <i class="fas fa-language"></i>
+                </div>
+                <h3 class="sdij-title">영어</h3>
+                <p class="sdij-value text-gray-800">
+                  <span id="engSimul">-</span>/<span id="engTotal">-</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Biology -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="400">
+              <div class="text-center">
+                <div class="sdij-icon accent mx-auto">
+                  <i class="fas fa-dna"></i>
+                </div>
+                <h3 class="sdij-title">생명</h3>
+                <p class="sdij-value text-gray-800">
+                  <span id="bioSimul">-</span>/<span id="bioTotal">-</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Geography -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="500">
+              <div class="text-center">
+                <div class="sdij-icon info mx-auto">
+                  <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="sdij-title">지구</h3>
+                <p class="sdij-value text-gray-800">
+                  <span id="geoSimul">-</span>/<span id="geoTotal">-</span>
+                </p>
+              </div>
+            </div>
+
+            <!-- Total Questions -->
+            <div class="sdij-card p-8" data-aos="fade-up" data-aos-delay="600">
+              <div class="text-center">
+                <div class="sdij-icon warning mx-auto">
+                  <i class="fas fa-chart-bar"></i>
+                </div>
+                <h3 class="sdij-title">총 문제 수</h3>
+                <p class="sdij-value text-gray-800" id="totalQ">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scroll to Top Button -->
+  <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Footer -->
+  <footer class="sdij-footer text-white py-8">
+    <div class="container mx-auto px-6 text-center">
+      <div class="mb-4">
+        <div class="w-12 h-12 sdij-gradient rounded-xl flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-graduation-cap text-white text-xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Memoir</h3>
+        <p class="text-gray-400">시대인재 학생 성취 대시보드</p>
+      </div>
+      <div class="border-t border-gray-700 pt-4">
+        <p class="text-gray-400 text-sm">© 2024 시대인재. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
+    });
+
+    // Scroll to top functionality
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Show/hide scroll to top button
+    window.addEventListener('scroll', function() {
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Glide Template Column 쿼리스트링 읽기 로직 (기존 코드 유지)
     const params = new URLSearchParams(location.search);
     const get = (k,d='') => params.get(k) || d;
     const set = (id,key,suffix='') => {
@@ -90,7 +724,6 @@
     set('bioSimul','bioSimul'); set('bioTotal','bioTotal');
     set('geoSimul','geoSimul'); set('geoTotal','geoTotal');
     set('totalQ','totalQ','문제');
-    AOS.init({offset:100,duration:700,easing:'ease-out',once:false});
   </script>
 </body>
 </html>
