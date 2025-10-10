@@ -78,6 +78,22 @@ const MemoirRecap: React.FC<{ person: any }> = ({ person }) => {
         </div>
       </section>
 
+      {/* 2.5. Summary Section (Additional Text) */}
+      <section className="py-8 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center">
+            <p className="text-lg" style={{ color: '#6B7280' }}>
+              <span className="font-bold" style={{ color: '#00458C' }}>{person.name || '-'}</span>님은{' '}
+              <span className="font-bold" style={{ color: '#00458C' }}>{person.totalStudents || '-'}</span>명 중,{' '}
+              <span className="font-bold" style={{ color: '#00458C' }}>{person.campusStudents || '-'}</span>명의 학생과 함께{' '}
+              <span className="font-bold" style={{ color: '#00458C' }}>{person.campus || '-'}</span>에서,{' '}
+              <span className="font-bold" style={{ color: '#00458C' }}>{person.className || '-'}</span>{' '}
+              <span className="font-bold" style={{ color: '#00458C' }}>{person.classStudents || '-'}</span>명과 함께 1년간 치열하게 달려왔습니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* 3. Total Hours Block */}
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
