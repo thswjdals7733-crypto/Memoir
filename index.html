@@ -3,16 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Memoir | 시대인재 - 학생 성취 대시보드</title>
+  <title>Memoir | 시대인재</title>
   
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   
   <!-- Pretendard Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css" />
@@ -22,1680 +19,367 @@
       font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     }
     
-    /* Monotone Color Palette with Point Color */
-    :root {
-      /* Light Grays */
-      --very-light-gray: #FAFAFA;     /* 가장 연한 배경 */
-      --light-gray: #F3F4F6;          /* 연한 배경 */
-      --pale-gray: #E5E7EB;           /* 중간 연한 배경 */
-      --medium-gray: #D1D5DB;         /* 중간 회색 */
-      --slate-gray: #9CA3AF;          /* 보조 텍스트 */
-      
-      /* Dark Grays */
-      --dark-gray: #6B7280;           /* 주요 텍스트 */
-      --darker-gray: #374151;         /* 강조 텍스트 */
-      --darkest-gray: #111827;        /* 가장 진한 텍스트 */
-      
-      /* Pure Colors */
-      --white: #FFFFFF;               /* 순수 흰색 */
-      --black: #000000;               /* 순수 검정 */
-      
-      /* Point Color */
-      --point-blue: #0459F0;          /* 포인트 컬러 (강조, 버튼, 메트릭) */
-      --point-blue-bg: #E3F2FD;       /* 포인트 컬러 배경 (연한 파란색) */
-      --point-blue-hover: #0347C9;    /* 포인트 컬러 hover */
+    body {
+      background-color: #FFFFFF;
+      color: #1F2937;
     }
     
-    .sdij-gradient {
-      background: linear-gradient(135deg, var(--darkest-gray) 0%, var(--darker-gray) 100%);
+    .card {
+      background-color: #F0F2F5;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
     
-    .sdij-card {
-      background: var(--very-light-gray);
-      border-radius: 1.5rem;
-      border: 1px solid var(--medium-gray);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    .intro-section {
+      background: linear-gradient(135deg, #B9D3FF 0%, #0459F0 60%, #2ECDF7 100%);
+      color: #FFFFFF;
+      padding: 4rem 0;
+      border-radius: 0;
     }
     
-    .sdij-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      border-color: var(--light-gray);
+    .point-color {
+      color: #0459F0;
     }
     
-    .sdij-header {
-      background: var(--white);
-      color: var(--dark-gray);
-      border-bottom: 1px solid var(--medium-gray);
-      backdrop-filter: blur(10px);
-    }
-    
-    .sdij-nav-link {
-      color: var(--dark-gray);
+    .intro-text {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      text-align: center;
       font-weight: 500;
-      padding: 0.75rem 1.5rem;
+    }
+    
+    .intro-text p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .intro-emoji {
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+    
+    .timeline-card {
+      background: #FFFFFF;
       border-radius: 0.75rem;
-      transition: all 0.3s ease;
-      text-decoration: none;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      text-align: center;
     }
     
-    .sdij-nav-link:hover {
-      background: var(--very-light-gray);
-      color: var(--darkest-gray);
-      transform: translateY(-1px);
-    }
-    
-    .sdij-nav-link.active {
-      color: var(--darkest-gray);
-    }
-    
-    .sdij-hero {
-      background: linear-gradient(135deg, var(--point-blue-bg) 0%, var(--white) 100%);
-      color: var(--darkest-gray);
+    .timeline-connector {
+      height: 2px;
+      background: #E5E7EB;
+      margin: 0 2rem;
+      flex: 1;
       position: relative;
     }
     
-    .sdij-hero::before {
-      content: '';
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #0459F0;
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-      opacity: 0.3;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
     
-    .sdij-section {
-      background: var(--white);
+    .timeline-metric {
+      font-size: 1.25rem;
+      color: #1F2937;
+      margin: 2rem 0;
+      text-align: center;
     }
     
-    .sdij-section-alt {
-      background: var(--point-blue-bg);
-    }
-    
-    .sdij-icon {
-      width: 4rem;
-      height: 4rem;
+    .check-in-out-box {
+      background: #F0F2F5;
       border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      gap: 1rem;
+      min-height: 200px;
     }
     
-    .sdij-icon.primary { background: var(--point-blue); color: white; }
-    .sdij-icon.secondary { background: var(--point-blue); color: var(--white); }
-    .sdij-icon.accent { background: var(--point-blue); color: var(--white); }
-    .sdij-icon.success { background: var(--point-blue); color: var(--white); }
-    .sdij-icon.warning { background: var(--point-blue); color: var(--white); }
-    .sdij-icon.info { background: var(--point-blue); color: var(--white); }
-    
-    .sdij-title {
-      color: var(--darkest-gray);
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    
-    .sdij-subtitle {
-      color: var(--dark-gray);
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-    
-    .sdij-value {
-      font-weight: 700;
-      font-size: 1.875rem;
-      margin-top: 0.5rem;
-    }
-    
-    /* 통일된 메트릭 크기 */
-    .sdij-metric-xl {
-      font-size: 4rem;
-      font-weight: 800;
-      color: var(--point-blue);
-      line-height: 1;
-    }
-    
-    .sdij-metric-lg {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--point-blue);
-      line-height: 1;
-    }
-    
-    .sdij-metric-md {
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--point-blue);
-      line-height: 1;
-    }
-    
-    .sdij-metric-unit {
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--darker-gray);
-      margin-left: 0.5rem;
-    }
-    
-    .scroll-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 3.5rem;
-      height: 3.5rem;
-      background: var(--point-blue);
+    .sun-icon {
+      width: 60px;
+      height: 60px;
+      background: #03A9F4;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1000;
-      box-shadow: 0 8px 16px rgba(0, 113, 206, 0.3);
-      border: none;
+      box-shadow: 0 4px 12px rgba(3, 169, 244, 0.4);
+      font-size: 2rem;
     }
     
-    .scroll-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .scroll-to-top:hover {
-      transform: translateY(-4px) scale(1.05);
-      background: var(--point-blue-hover);
-      box-shadow: 0 12px 24px rgba(4, 89, 240, 0.4);
-    }
-    
-    .sdij-footer {
-      background: var(--darkest-gray);
-      color: var(--pale-gray);
-      border-top: 1px solid var(--medium-gray);
-    }
-    
-    .sdij-badge {
-      display: inline-flex;
+    .moon-icon {
+      width: 60px;
+      height: 60px;
+      background: #1A237E;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
-      padding: 0.75rem 1.5rem;
-      border-radius: 1.5rem;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(26, 35, 126, 0.4);
+      font-size: 2rem;
+    }
+    
+    .time-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1F2937;
+    }
+    
+    .time-label {
       font-size: 0.875rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: all 0.3s ease;
-      background: var(--pale-gray);
-      color: var(--slate-gray);
-      border: 2px solid var(--light-gray);
+      color: #6B7280;
     }
     
-    .sdij-badge.primary {
-      background: var(--point-blue);
-      color: white;
-      border-color: var(--point-blue);
-    }
-    
-    .sdij-badge.primary:hover {
-      background: var(--point-blue-hover);
-      border-color: var(--point-blue-hover);
-      transform: translateY(-2px);
-    }
-    
-    .sdij-badge.secondary {
-      background: transparent;
-      color: var(--slate-gray);
-      border-color: var(--light-gray);
-    }
-    
-    .sdij-badge.secondary:hover {
-      background: var(--pale-gray);
-      color: var(--charcoal);
-      border-color: var(--slate-gray);
-    }
-    
-    /* Modern Button Styles */
-    .sdij-btn {
-      background: var(--point-blue);
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
+    .hours-card {
+      background: #F0F2F5;
       border-radius: 1rem;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 8px rgba(4, 89, 240, 0.2);
+      padding: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      position: relative;
+      overflow: hidden;
     }
     
-    .sdij-btn:hover {
-      background: var(--point-blue-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(4, 89, 240, 0.3);
-    }
-    
-    .sdij-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(4, 89, 240, 0.2);
-    }
-    
-    /* Data Highlight Styles */
-    .sdij-data-highlight {
-      color: var(--point-blue);
+    .hours-title {
+      font-size: 1.3125rem;
       font-weight: 700;
+      color: #1F2937;
+      line-height: 1.6;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    .sdij-data-accent {
-      color: var(--point-blue);
-      font-weight: 800;
+    .classroom-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
     }
     
-    /* Timeline Section Styles */
-    .timeline-container {
-      position: relative;
-    }
-    
-    .timeline-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .timeline-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-    
-    .timeline-connector {
-      position: relative;
-    }
-    
-    .timeline-connector::before {
-      content: '';
+    .hours-header {
       position: absolute;
-      top: 50%;
+      top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--medium-gray), var(--slate-gray), var(--medium-gray));
-      transform: translateY(-50%);
-      border-radius: 2px;
-    }
-    
-    .timeline-dot {
-      position: relative;
+      padding: 2rem;
+      background: linear-gradient(to bottom, rgba(240, 242, 245, 0.98) 0%, rgba(240, 242, 245, 0.7) 70%, transparent 100%);
       z-index: 10;
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
     
-    @media (max-width: 768px) {
-      .timeline-container {
-        flex-direction: column;
-        gap: 2rem;
-      }
-      
-      .timeline-connector {
-        display: none;
-      }
-      
-      .timeline-card {
-        min-width: 100%;
-      }
+    .hours-number-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .hours-number {
+      font-size: 5rem;
+      font-weight: 700;
+      color: #0459F0;
+      line-height: 1;
+    }
+    
+    .hours-text {
+      font-size: 2rem;
+      color: #1F2937;
+      font-weight: 500;
+    }
+    
+    .hours-illustration {
+      flex: 1;
+      max-width: 300px;
+      height: auto;
+      border-radius: 0.5rem;
     }
   </style>
 </head>
-<body class="bg-gray-50">
-  <!-- Fixed Header -->
-  <header class="fixed top-0 w-full z-50 sdij-header">
-    <nav class="container mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <div class="w-12 h-12 sdij-gradient rounded-xl flex items-center justify-center">
-            <i class="fas fa-graduation-cap text-white text-xl"></i>
-          </div>
-          <div>
-            <h1 class="text-xl font-bold text-gray-800">Memoir</h1>
-            <p class="text-sm text-gray-500">시대인재 학생 대시보드</p>
-          </div>
-        </div>
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="#basic" class="sdij-nav-link">기본 정보</a>
-          <a href="#students" class="sdij-nav-link">학생 현황</a>
-          <a href="#life" class="sdij-nav-link">생활 관리</a>
-          <a href="#study" class="sdij-nav-link">학습 현황</a>
-          <a href="#subjects" class="sdij-nav-link">과목별 성취</a>
-        </div>
-        <div class="md:hidden">
-          <button class="text-gray-600 hover:text-gray-800">
-            <i class="fas fa-bars text-xl"></i>
-          </button>
-        </div>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <!-- Main Content -->
-  <main class="pt-20">
-    <!-- Hero Section -->
-    <section class="py-20 sdij-hero relative">
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-5xl mx-auto text-center">
-          <div data-aos="fade-up">
-            <div class="mb-6">
-              <span class="sdij-badge primary text-sm px-4 py-2">학생 성취 대시보드</span>
-            </div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-6" id="name" style="color: var(--black);">학생 이름</h1>
-            <p class="text-xl mb-8" style="color: var(--black);">시대인재에서의 학습 현황과 성취를 한눈에 확인하세요</p>
-            <div class="flex flex-wrap justify-center gap-4" style="color: var(--black);">
-              <div class="flex items-center gap-2">
-                <i class="fas fa-building text-sm"></i>
-                <span class="text-sm">캠퍼스: <span id="campus">-</span></span>
-              </div>
-              <div class="flex items-center gap-2">
-                <i class="fas fa-users text-sm"></i>
-                <span class="text-sm">반: <span id="className">-</span></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Memoir Message Section -->
-    <section class="py-16 bg-white">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <div class="bg-white p-12 rounded-lg shadow-sm border border-gray-100" data-aos="fade-up">
-            <div class="text-center mb-8">
-              <h2 class="text-2xl font-bold mb-4" style="color: var(--black);">부엉이 여러분, 수고 많으셨습니다.</h2>
-            </div>
-            
-            <div class="leading-relaxed space-y-4 text-left" style="color: var(--black);">
-              <p class="text-lg">
-                학생님이 달려온 시간을 회고하는 <span class="font-bold">[Memoir]</span>
-              </p>
-              
-              <p class="text-base italic">
-                📝 'memoir'는 유명인의 회고록이라는 뜻을 지녔습니다.
-              </p>
-              
-              <p class="text-base leading-lax">
-                시대인재는 여러분 하나하나를 존중하고, 여러분이 시대인재와 함께한 시간의 가치를 간과하지 않기에 그동안 달려온 시간을 회고해보고자 했습니다.
-              </p>
-            </div>
-            
-            <div class="mt-8 pt-6 border-t border-gray-100">
-              <div class="text-center">
-                <button class="sdij-btn">
-                  <i class="fas fa-heart mr-2"></i>
-                  시대인재와 함께한 소중한 시간
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Timeline Section -->
-    <section class="py-16 sdij-section">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <div class="timeline-container flex items-center justify-center" data-aos="fade-up">
-            <!-- Start Card -->
-            <div class="timeline-card rounded-2xl shadow-md border border-gray-200 p-6 min-w-[200px] text-center" style="background: var(--very-light-gray);">
-              <h3 class="text-lg font-semibold mb-2" style="color: var(--dark-gray);">시대인재 N 처음 만난 날</h3>
-              <p class="text-2xl font-bold" id="startDate" style="color: var(--darkest-gray);">2/1X일</p>
-            </div>
-            
-            <!-- Connector Line -->
-            <div class="timeline-connector flex-1 mx-8 relative">
-              <div class="w-4 h-4 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="background: var(--point-blue); box-shadow: 0 2px 4px rgba(4, 89, 240, 0.3); z-index: 10;"></div>
-            </div>
-            
-            <!-- End Card -->
-            <div class="timeline-card rounded-2xl shadow-md border border-gray-200 p-6 min-w-[200px] text-center" style="background: var(--very-light-gray);">
-              <h3 class="text-lg font-semibold mb-2" style="color: var(--dark-gray);">The End</h3>
-              <p class="text-2xl font-bold" id="endDate" style="color: var(--darkest-gray);">11/13</p>
-            </div>
-          </div>
+  <!-- INTRO Section -->
+  <section class="intro-section">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="intro-text" data-aos="fade-up">
+          <p>
+            부엉이 여러분, 수고 많으셨습니다.<br>
+            학생님이 달려온 시간을 회고하는 [Memoir]
+          </p>
           
-          <!-- Total Days Metric -->
-          <div class="text-center mt-8" data-aos="fade-up" data-aos-delay="200">
-            <p class="text-xl" style="color: var(--slate-gray);">
-              총 <span class="font-bold" id="totalDays" style="color: var(--point-blue);">XXX</span>일 함께했습니다.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Additional Text Section -->
-    <section class="py-8 px-6 sdij-section">
-      <div class="max-w-5xl mx-auto">
-        <div class="text-center">
-          <p class="text-lg text-gray-700">
-            <span class="font-bold" style="color: var(--sdij-primary);" id="summaryName">-</span>님은 <span class="font-bold" style="color: var(--sdij-primary);" id="summaryTotalStudents">-</span>명 중, <span class="font-bold" style="color: var(--sdij-primary);" id="summaryCampusStudents">-</span>명의 학생과 함께 <span class="font-bold" style="color: var(--sdij-primary);" id="summaryCampus">-</span>에서, <span class="font-bold" style="color: var(--sdij-primary);" id="summaryClassName">-</span> <span class="font-bold" style="color: var(--sdij-primary);" id="summaryClassStudents">-</span>명과 함께 1년간 치열하게 달려왔습니다.
+          <p style="font-size: 1.25rem; opacity: 0.95;">
+            <span class="intro-emoji">📝</span>'memoir'는 유명인의 회고록이라는 뜻을 지녔습니다.
+          </p>
+          
+          <p style="font-size: 1.25rem; opacity: 0.95;">
+            시대인재는 여러분 하나하나를 존중하고, 여러분이 시대인재와 함께한 시간의 가치를 간과하지 않기에 그동안 달려온 시간을 회고해보고자 했습니다.
           </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-
-    <!-- Total Hours Block -->
-    <section class="py-16 sdij-section">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">함께한 시간</h2>
-            <p class="sdij-subtitle">시대인재와 함께 달려온 소중한 시간을 확인하세요</p>
+  <!-- Timeline Section (등원 기간) -->
+  <section class="py-16" style="background: #FFFFFF;">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        
+        <!-- Timeline Cards and Connector -->
+        <div class="flex items-center mb-8" data-aos="fade-up">
+          <!-- Start Card -->
+          <div class="timeline-card">
+            <p class="text-sm text-gray-600 mb-1">시대인재 N 처음 만난 날</p>
+            <p class="text-lg font-semibold text-gray-800" id="startDate">2024.02.15</p>
           </div>
           
-          <!-- Main Stats Card with Split Layout -->
-          <div class="sdij-card p-12 mb-8" data-aos="fade-up" data-aos-delay="100" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <div class="flex flex-col lg:flex-row items-center gap-8">
-              <!-- Left: Large Number -->
-              <div class="flex-1 text-center lg:text-left">
-                <div class="mb-4">
-                  <span class="text-6xl lg:text-8xl font-bold" style="color: #00458C;" id="totalHours">0</span>
-                  <span class="text-2xl lg:text-3xl font-medium text-gray-700 ml-2">시간</span>
-                </div>
-                <p class="text-lg text-gray-600">총 공부 시간</p>
-              </div>
-              
-              <!-- Right: Custom Image -->
-              <div class="flex-1">
-                <img src="스크린샷 2025-10-23 오후 10.57.36.png" alt="Study Time Illustration" class="w-full h-auto rounded-lg shadow-lg mx-auto" style="max-width: 300px; max-height: 300px;">
-              </div>
-              </div>
-            </div>
+          <!-- Connector Line -->
+          <div class="timeline-connector">
+            <div class="timeline-dot"></div>
           </div>
           
-          <!-- Supporting Text Card -->
-          <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-            <div class="sdij-card p-8">
-              <p class="text-lg" style="color: var(--slate-gray);">
-                총 <span class="font-bold" style="color: var(--dark-navy);" id="cohortStudents">-</span>명의 학생과 함께 
-                <span class="font-bold sdij-metric-md" id="cohortHours">-</span>시간 동안 
-                강의를 들으며 달려왔습니다
-              </p>
-            </div>
+          <!-- End Card -->
+          <div class="timeline-card">
+            <p class="text-sm text-gray-600 mb-1">The End</p>
+            <p class="text-lg font-semibold text-gray-800" id="endDate">2024.11.13</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Study Time Illustration Section -->
-    <section class="py-16 sdij-section-alt">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Study Time Illustration Card -->
-          <div class="sdij-card p-8 mb-8" data-aos="fade-up" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <div class="text-center">
-              <!-- Image Container with Relative Positioning -->
-              <div style="position: relative; display: inline-block; max-width: 400px; max-height: 500px;">
-                <img src="image.png" alt="Study Time Illustration" class="mx-auto max-w-full h-auto mb-6" style="max-width: 400px; max-height: 500px;">
-                
-                <!-- Dynamic Data Overlay (시간 데이터) -->
-                <div style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%); font-family: Arial, sans-serif; font-size: 42px; font-weight: bold; color: #000000; white-space: nowrap; pointer-events: none;">
-                  <span id="overlayStudyTime" style="background: transparent; letter-spacing: 2px;">0</span><span style="font-size: 36px;">시간</span>
-                </div>
-              </div>
-              
-              <!-- Caption Text -->
-              <div class="text-center">
-                <p class="text-lg font-medium text-gray-700">
-                  <span id="studentName">학생 데이터</span>님! 총 
-                  <span class="font-bold" style="color: #00458C;" id="studyTimeCaption">0</span>시간 만큼 
-                  라이브러리에서 보냈군요.
-                </p>
-              </div>
-            </div>
-          </div>
+        
+        <!-- Total Days Metric -->
+        <div class="timeline-metric" data-aos="fade-up" data-aos-delay="100">
+          총 <span class="point-color font-bold" id="totalDays">150</span>일 함께했습니다.
         </div>
-      </div>
-    </section>
-
-    <!-- Check-in/Check-out Section -->
-    <section class="py-16 sdij-section-alt">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Section Title -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">출결 패턴</h2>
-            <p class="sdij-subtitle">평균 등원·하원 시간을 확인하세요</p>
-          </div>
-          
-          <!-- Illustration Card -->
-          <div class="sdij-card p-8 mb-8" data-aos="fade-up" data-aos-delay="100" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <div class="text-center">
-              <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="mx-auto max-w-full h-auto" style="max-width: 100%;">
-                <!-- Background -->
-                <rect width="400" height="300" fill="#FFFFFF"/>
-                
-                <!-- Main Card Container -->
-                <rect x="0" y="0" width="400" height="300" rx="16" fill="#FFFFFF"/>
-                
-                <!-- Left Box (Check-in / 등원) -->
-                <rect x="20" y="20" width="170" height="260" rx="12" fill="#FEF3C7"/>
-                
-                <!-- Sun Icon -->
-                <circle cx="105" cy="100" r="30" fill="#FBBF24"/>
-                <!-- Sun rays -->
-                <line x1="105" y1="60" x2="105" y2="40" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="105" y1="140" x2="105" y2="160" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="60" y1="100" x2="80" y2="100" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="150" y1="100" x2="130" y2="100" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="80" y1="70" x2="90" y2="80" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="130" y1="70" x2="120" y2="80" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="80" y1="130" x2="90" y2="120" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                <line x1="130" y1="130" x2="120" y2="120" stroke="#F59E0B" stroke-width="4" stroke-linecap="round"/>
-                
-                <!-- Check-in Time Text -->
-                <text x="105" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#92400E">
-                  평균 등원 시간
-                </text>
-                <text x="105" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#002B5C">
-                  <tspan id="avgCheckIn">08:00</tspan>
-                </text>
-                
-                <!-- Right Box (Check-out / 하원) -->
-                <rect x="210" y="20" width="170" height="260" rx="12" fill="#DBEAFE"/>
-                
-                <!-- Moon Icon -->
-                <circle cx="295" cy="100" r="30" fill="#60A5FA"/>
-                <circle cx="310" cy="85" r="24" fill="#DBEAFE"/>
-                <!-- Stars -->
-                <circle cx="260" cy="70" r="3" fill="#FBBF24"/>
-                <circle cx="270" cy="60" r="2.5" fill="#FBBF24"/>
-                <circle cx="320" cy="65" r="2.5" fill="#FBBF24"/>
-                <text x="258" y="75" font-family="Arial, sans-serif" font-size="14" fill="#FBBF24">✨</text>
-                <text x="318" y="70" font-family="Arial, sans-serif" font-size="12" fill="#FBBF24">✨</text>
-                
-                <!-- Check-out Time Text -->
-                <text x="295" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#1E3A8A">
-                  평균 하원 시간
-                </text>
-                <text x="295" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#002B5C">
-                  <tspan id="avgCheckOut">22:00</tspan>
-                </text>
-                
-                <!-- Shadow effects -->
-                <ellipse cx="105" cy="250" rx="50" ry="8" fill="#FCD34D" opacity="0.2"/>
-                <ellipse cx="295" cy="250" rx="50" ry="8" fill="#93C5FD" opacity="0.2"/>
-                
-                <!-- Decorative elements -->
-                <circle cx="50" cy="50" r="3" fill="#FBBF24" opacity="0.5"/>
-                <circle cx="350" cy="55" r="2.5" fill="#60A5FA" opacity="0.5"/>
-                <circle cx="40" cy="250" r="2" fill="#002B5C" opacity="0.3"/>
-                <circle cx="360" cy="255" r="3" fill="#002B5C" opacity="0.3"/>
-              </svg>
-            </div>
-            
-            <!-- Caption Text Below Image -->
-            <div class="text-center mt-6">
-              <p class="text-lg font-medium text-gray-700">
-                <span id="checkInName">학생 데이터</span>님은, 평균적으로 라이브러리에 
-                <span class="font-bold" style="color: #F59E0B;" id="checkInTime">08:00</span>에 등원하여, 
-                <span class="font-bold" style="color: #3B82F6;" id="checkOutTime">22:00</span>에 하원하였습니다.
-              </p>
-            </div>
-          </div>
+        
+        <!-- Summary Message -->
+        <div class="text-center text-gray-700 mt-8" data-aos="fade-up" data-aos-delay="200">
+          <p class="text-lg">
+            <span id="studentNameOutput" class="font-semibold">학생 이름</span>님은, <span id="campusNameOutput" class="font-semibold">고사관</span> <span id="classNameOutput" class="font-semibold">N</span>반에서 1년간 치열하게 달려왔습니다.
+          </p>
         </div>
-      </div>
-    </section>
-
-    <!-- Focus Score Section -->
-    <section class="py-16 sdij-section">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Section Title -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">공부 몰입도</h2>
-            <p class="sdij-subtitle">1년간의 평균 공부 집중도를 확인하세요</p>
-          </div>
-          
-          <!-- Gauge Card -->
-          <div class="sdij-card p-12" data-aos="fade-up" data-aos-delay="100" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <div class="text-center">
-              <svg width="400" height="450" viewBox="0 0 400 450" xmlns="http://www.w3.org/2000/svg" class="mx-auto max-w-full h-auto" style="max-width: 500px;">
-                <defs>
-                  <!-- Gradient for the gauge -->
-                  <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
-                    <stop offset="50%" style="stop-color:#F59E0B;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
-                  </linearGradient>
-                </defs>
-                
-                <!-- Background -->
-                <rect width="400" height="450" fill="#FFFFFF"/>
-                
-                <!-- Title -->
-                <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#002B5C">
-                  평균 공부 몰입도
-                </text>
-                
-                <!-- Gauge Background (Gray Arc) -->
-                <path d="M 80 250 A 120 120 0 0 1 320 250" 
-                      fill="none" 
-                      stroke="#E5E7EB" 
-                      stroke-width="24" 
-                      stroke-linecap="round"/>
-                
-                <!-- Gauge Progress (Gradient Arc) - Dynamic based on score -->
-                <path d="M 80 250 A 120 120 0 0 1 290 165" 
-                      fill="none" 
-                      stroke="url(#gaugeGradient)" 
-                      stroke-width="24" 
-                      stroke-linecap="round"
-                      id="gaugeProgress"/>
-                
-                
-                <!-- Score Display -->
-                <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#002B5C">
-                  <tspan id="avgFocusScore">75</tspan>
-                </text>
-                
-                <!-- Min Label -->
-                <text x="60" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#6B7280">
-                  <tspan id="minFocusScore">0</tspan>
-                </text>
-                
-                <!-- Max Label -->
-                <text x="340" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#6B7280">
-                  <tspan id="maxFocusScore">100</tspan>
-                </text>
-                
-                <!-- Pointer/Needle -->
-                <g id="gaugePointer" transform="rotate(135 200 250)">
-                  <line x1="200" y1="250" x2="200" y2="170" stroke="#002B5C" stroke-width="3" stroke-linecap="round"/>
-                  <circle cx="200" cy="250" r="8" fill="#002B5C"/>
-                  <circle cx="200" cy="250" r="4" fill="#FFFFFF"/>
-                </g>
-                
-                
-                <!-- Caption Text -->
-                <text x="200" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">
-                  (동적 데이터)
-                </text>
-                
-                <text x="200" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#374151" style="line-height: 1.6;">
-                  <tspan x="200" dy="0">그동안, 공부 몰입도는 평균적으로</tspan>
-                  <tspan x="200" dy="20"><tspan font-weight="700" fill="#EF4444"><tspan id="captionMinFocus">0</tspan></tspan> ~ <tspan font-weight="700" fill="#10B981"><tspan id="captionMaxFocus">100</tspan></tspan> 중 <tspan font-weight="700" fill="#002B5C"><tspan id="captionAvgFocus">75</tspan></tspan>로</tspan>
-                  <tspan x="200" dy="20">공부를 하며 일 년을 달려왔습니다.</tspan>
-                </text>
-                
-                <!-- Decorative elements -->
-                <circle cx="50" cy="50" r="3" fill="#002B5C" opacity="0.3"/>
-                <circle cx="350" cy="60" r="2.5" fill="#10B981" opacity="0.3"/>
-                <circle cx="60" cy="420" r="2" fill="#F59E0B" opacity="0.3"/>
-                <circle cx="340" cy="430" r="3" fill="#002B5C" opacity="0.3"/>
-                
-                <!-- Shadow under gauge -->
-                <ellipse cx="200" cy="260" rx="100" ry="10" fill="#000000" opacity="0.05"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Meal Section -->
-    <section class="py-16 sdij-section-alt">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Section Title -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">시대인재가 따뜻한 한 끼를 주었길 바라요</h2>
-          </div>
-          
-          <!-- 2x2 Grid Cards -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <!-- Top Left: Icon & Label -->
-            <div class="p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="100" style="background: #FFFFFF; border: 1px solid #E5E7EB; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);">
-              <div class="text-center">
-                <div class="w-16 h-16 rounded-xl mx-auto mb-4 flex items-center justify-center" style="background: #00458C;">
-                  <i class="fas fa-utensils text-white text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2" style="color: var(--darkest-gray);">총 식사 일수</h3>
-                <p class="sdij-subtitle mt-2">시대인재와 함께한 식사</p>
-              </div>
-            </div>
-            
-            <!-- Top Right: Metric & Illustration -->
-            <div class="p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="200" style="background: #FFFFFF; border: 1px solid #E5E7EB; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);">
-              <div class="grid grid-cols-2 gap-4 items-center">
-                <div class="text-center">
-                  <div class="flex items-baseline justify-center gap-2">
-                    <div class="text-4xl font-bold" id="totalMeals" style="color: #00458C;">0</div>
-                    <div class="text-xl font-medium" style="color: var(--darker-gray);">끼</div>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <img src="KakaoTalk_Photo_2025-10-11-09-13-58.jpeg" alt="부엉이와 포크/숟가락" class="w-24 h-24 mx-auto object-contain rounded-lg shadow-md">
-                </div>
-              </div>
-            </div>
-            
-            <!-- Bottom Left: Image Placeholder -->
-            <div class="p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="300" style="background: #FFFFFF; border: 1px solid #E5E7EB; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);">
-              <div class="flex items-center justify-center h-full">
-                <div class="text-center">
-                  <div class="text-6xl mb-4">📸</div>
-                  <p class="text-lg font-semibold" style="color: var(--dark-gray);">최애 메뉴 사진</p>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Bottom Right: Label & Favorite Meal -->
-            <div class="p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="400" style="background: #FFFFFF; border: 1px solid #E5E7EB; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);">
-              <div class="text-center">
-                <h3 class="text-xl font-bold mb-4" style="color: var(--darkest-gray);">최애 메뉴</h3>
-                <div class="text-3xl font-bold mb-2" id="favMeal" style="color: #00458C;">-</div>
-                <p class="sdij-subtitle">가장 인기있던 메뉴</p>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Explanatory Text -->
-          <div class="space-y-4" data-aos="fade-up" data-aos-delay="500">
-            <p class="text-lg text-center" style="color: var(--dark-gray);">
-              시대인재와 함께한 식사 일 수 동안, 총 <span class="font-bold" id="mealStudents" style="color: #00458C;">-</span> 명의 학생과 급식 먹은 횟수 <span class="font-bold" id="mealCount" style="color: #00458C;">-</span> 끼를 함께했습니다.
-            </p>
-            <p class="text-lg text-center" style="color: var(--dark-gray);">
-              • 그 중 <span class="font-bold" id="mealCampus" style="color: #00458C;">-</span>이 가장 좋아했던 음식은 <span class="font-bold" id="mealFavFood" style="color: #00458C;">-</span> 이었습니다.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Solved Problems Section -->
-    <section class="py-16 sdij-section">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Section Title -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">학습 성취</h2>
-            <p class="sdij-subtitle">서바이벌 문제 풀이 현황을 확인하세요</p>
-          </div>
-          
-          <!-- Illustration Card -->
-          <div class="sdij-card p-12" data-aos="fade-up" data-aos-delay="100" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <div class="text-center">
-              <svg width="400" height="500" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" class="mx-auto max-w-full h-auto" style="max-width: 500px;">
-                <!-- Background -->
-                <rect width="400" height="500" fill="#FFFFFF"/>
-                
-                <!-- Card Container -->
-                <rect x="30" y="40" width="340" height="380" rx="16" fill="#FFFEF7" stroke="#E5E7EB" stroke-width="2"/>
-                
-                <!-- Text Section (Left) -->
-                <text x="60" y="90" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#002B5C">
-                  푼 서바이벌 문제 수
-                </text>
-                
-                <text x="60" y="130" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#F59E0B">
-                  <tspan id="solvedProblems">0</tspan>
-                </text>
-                
-                <text x="60" y="155" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#6B7280">
-                  문제
-                </text>
-                
-                <!-- Stack of Papers (Center-Right) -->
-                <!-- Bottom papers (slightly offset to create stack effect) -->
-                <rect x="180" y="250" width="80" height="120" rx="3" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="1.5"/>
-                <line x1="190" y1="265" x2="250" y2="265" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="190" y1="280" x2="250" y2="280" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="190" y1="295" x2="250" y2="295" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                
-                <rect x="183" y="245" width="80" height="120" rx="3" fill="#F9FAFB" stroke="#D1D5DB" stroke-width="1.5"/>
-                <line x1="193" y1="260" x2="253" y2="260" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="193" y1="275" x2="253" y2="275" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="193" y1="290" x2="253" y2="290" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                
-                <!-- Middle papers -->
-                <rect x="186" y="240" width="80" height="120" rx="3" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="2"/>
-                <line x1="196" y1="255" x2="256" y2="255" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="196" y1="270" x2="256" y2="270" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="196" y1="285" x2="256" y2="285" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="196" y1="300" x2="256" y2="300" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="196" y1="315" x2="256" y2="315" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="196" y1="330" x2="256" y2="330" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                
-                <!-- Top papers (tallest stack) -->
-                <rect x="189" y="180" width="80" height="180" rx="3" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="2"/>
-                <line x1="199" y1="200" x2="259" y2="200" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="199" y1="220" x2="259" y2="220" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="199" y1="240" x2="259" y2="240" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="199" y1="260" x2="259" y2="260" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="199" y1="280" x2="259" y2="280" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="199" y1="300" x2="259" y2="300" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="199" y1="320" x2="259" y2="320" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                <line x1="199" y1="340" x2="259" y2="340" stroke="#9CA3AF" stroke-width="1" opacity="0.5"/>
-                
-                <!-- Paper title/header on top sheet -->
-                <rect x="199" y="190" width="60" height="8" rx="2" fill="#F59E0B" opacity="0.3"/>
-                
-                <!-- Owl (Right side - surprised expression) -->
-                <!-- Body -->
-                <ellipse cx="300" cy="290" rx="35" ry="40" fill="#F97316" stroke="#EA580C" stroke-width="2"/>
-                
-                <!-- Head -->
-                <circle cx="300" cy="250" r="30" fill="#FB923C" stroke="#EA580C" stroke-width="2"/>
-                
-                <!-- Eyes (WIDE with surprise) -->
-                <ellipse cx="290" cy="245" rx="10" ry="14" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
-                <ellipse cx="310" cy="245" rx="10" ry="14" fill="#FFFFFF" stroke="#1F2937" stroke-width="1.5"/>
-                <circle cx="290" cy="247" r="6" fill="#1F2937"/>
-                <circle cx="310" cy="247" r="6" fill="#1F2937"/>
-                <circle cx="288" cy="244" r="2" fill="#FFFFFF"/>
-                <circle cx="308" cy="244" r="2" fill="#FFFFFF"/>
-                
-                <!-- Beak (small open - surprised) -->
-                <ellipse cx="300" cy="260" rx="4" ry="6" fill="#1F2937"/>
-                <path d="M 296 258 Q 300 262 304 258" fill="#FFFFFF" opacity="0.3"/>
-                
-                <!-- Eyebrows (raised in surprise) -->
-                <path d="M 282 235 Q 288 232 294 235" fill="none" stroke="#EA580C" stroke-width="2" stroke-linecap="round"/>
-                <path d="M 306 235 Q 312 232 318 235" fill="none" stroke="#EA580C" stroke-width="2" stroke-linecap="round"/>
-                
-                <!-- Wings (slightly up in surprise) -->
-                <ellipse cx="270" cy="280" rx="18" ry="28" fill="#FB923C" stroke="#EA580C" stroke-width="1.5" opacity="0.9" transform="rotate(-15 270 280)"/>
-                <ellipse cx="330" cy="280" rx="18" ry="28" fill="#FB923C" stroke="#EA580C" stroke-width="1.5" opacity="0.9" transform="rotate(15 330 280)"/>
-                
-                <!-- Feet -->
-                <ellipse cx="290" cy="325" rx="6" ry="8" fill="#FBBF24"/>
-                <ellipse cx="310" cy="325" rx="6" ry="8" fill="#FBBF24"/>
-                
-                <!-- Surprise effect lines -->
-                <line x1="265" y1="230" x2="258" y2="220" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-                <line x1="270" y1="235" x2="265" y2="223" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-                <line x1="335" y1="230" x2="342" y2="220" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-                <line x1="330" y1="235" x2="335" y2="223" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-                
-                <!-- Exclamation marks -->
-                <text x="255" y="215" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#F59E0B">!</text>
-                <text x="338" y="215" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#F59E0B">!</text>
-                
-                <!-- Shadow under stack -->
-                <ellipse cx="229" cy="372" rx="45" ry="8" fill="#000000" opacity="0.08"/>
-                
-                <!-- Shadow under owl -->
-                <ellipse cx="300" cy="332" rx="25" ry="6" fill="#000000" opacity="0.08"/>
-                
-                <!-- Caption Text -->
-                <text x="200" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#374151">
-                  <tspan x="200" dy="0"><tspan font-weight="700" fill="#002B5C"><tspan id="solvedStudentName">학생 데이터</tspan></tspan>님! 재원 기간동안</tspan>
-                  <tspan x="200" dy="20"><tspan font-weight="700" fill="#F59E0B"><tspan id="contentName">서바이벌</tspan></tspan> 총 <tspan font-weight="700" fill="#002B5C"><tspan id="totalSolved">0</tspan></tspan>나 풀었군요!</tspan>
-                </text>
-                
-                <!-- Decorative elements -->
-                <circle cx="50" cy="60" r="3" fill="#F59E0B" opacity="0.4"/>
-                <circle cx="350" cy="70" r="2.5" fill="#F97316" opacity="0.4"/>
-                <circle cx="60" cy="470" r="2" fill="#002B5C" opacity="0.3"/>
-                <circle cx="340" cy="480" r="3" fill="#F59E0B" opacity="0.4"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Subject Problems Chart Section -->
-    <section class="py-16 sdij-section-alt">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Section Title -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">과목별 문제 풀이 현황</h2>
-            <p class="sdij-subtitle">각 과목별로 풀어낸 문제 수를 확인할 수 있습니다</p>
-          </div>
-          
-          <!-- Chart Illustration -->
-          <div class="sdij-card p-8 mb-12" data-aos="fade-up" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <svg width="500" height="600" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" class="mx-auto max-w-full h-auto" style="max-width: 600px;">
-              <!-- Background -->
-              <rect width="500" height="600" fill="#FFFFFF"/>
-              
-              <!-- Title -->
-              <text x="250" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#002B5C">
-                과목별 문제 풀이 현황
-              </text>
-              
-              <!-- Chart Container -->
-              <rect x="40" y="70" width="420" height="380" rx="8" fill="#FAFAFA" stroke="#E5E7EB" stroke-width="1"/>
-              
-              <!-- Grid Lines -->
-              <line x1="140" y1="90" x2="140" y2="430" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="220" y1="90" x2="220" y2="430" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="300" y1="90" x2="300" y2="430" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="380" y1="90" x2="380" y2="430" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              
-              <!-- Grid Labels -->
-              <text x="140" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">25</text>
-              <text x="220" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">50</text>
-              <text x="300" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">75</text>
-              <text x="380" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">100</text>
-              
-              <!-- Bar 1: 국어 -->
-              <text x="60" y="130" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#002B5C">국어</text>
-              <rect x="60" y="140" width="0" height="30" rx="4" fill="#6B4EFF" opacity="0.9" id="koreanBar"/>
-              <text x="70" y="160" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#6B4EFF">
-                <tspan id="koreanSolved">0</tspan>
-              </text>
-              
-              <!-- Bar 2: 수학 -->
-              <text x="60" y="200" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#002B5C">수학</text>
-              <rect x="60" y="210" width="0" height="30" rx="4" fill="#6B4EFF" opacity="0.9" id="mathBar"/>
-              <text x="70" y="230" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#6B4EFF">
-                <tspan id="mathSolved">0</tspan>
-              </text>
-              
-              <!-- Bar 3: 영어 -->
-              <text x="60" y="270" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#002B5C">영어</text>
-              <rect x="60" y="280" width="0" height="30" rx="4" fill="#6B4EFF" opacity="0.9" id="englishBar"/>
-              <text x="70" y="300" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#6B4EFF">
-                <tspan id="englishSolved">0</tspan>
-              </text>
-              
-              <!-- Bar 4: 탐구 제1선택 -->
-              <text x="60" y="340" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#002B5C">탐구 제1선택</text>
-              <rect x="60" y="350" width="0" height="30" rx="4" fill="#6B4EFF" opacity="0.9" id="explore1Bar"/>
-              <text x="70" y="370" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#6B4EFF">
-                <tspan id="explore1Solved">0</tspan>
-              </text>
-              
-              <!-- Bar 5: 탐구 제2선택 -->
-              <text x="60" y="410" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#002B5C">탐구 제2선택</text>
-              <rect x="60" y="420" width="0" height="30" rx="4" fill="#6B4EFF" opacity="0.9" id="explore2Bar"/>
-              <text x="70" y="440" text-anchor="start" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#6B4EFF">
-                <tspan id="explore2Solved">0</tspan>
-              </text>
-              
-              <!-- Caption Text -->
-              <text x="250" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#374151">
-                <tspan x="250" dy="0">그 중, <tspan font-weight="700" fill="#6B4EFF">국어 <tspan id="captionKorean">0</tspan></tspan>문제, <tspan font-weight="700" fill="#6B4EFF">수학 <tspan id="captionMath">0</tspan></tspan>문제,</tspan>
-                <tspan x="250" dy="20"><tspan font-weight="700" fill="#6B4EFF">영어 <tspan id="captionEnglish">0</tspan></tspan>문제, <tspan font-weight="700" fill="#6B4EFF">탐구 제1선택 <tspan id="captionExplore1">0</tspan></tspan>문제,</tspan>
-                <tspan x="250" dy="20"><tspan font-weight="700" fill="#6B4EFF">탐구 제2선택 <tspan id="captionExplore2">0</tspan></tspan>문제 만큼 풀었습니다.</tspan>
-              </text>
-              
-              <!-- Decorative elements -->
-              <circle cx="60" cy="60" r="3" fill="#6B4EFF" opacity="0.4"/>
-              <circle cx="440" cy="65" r="2.5" fill="#6B4EFF" opacity="0.3"/>
-              <circle cx="50" cy="560" r="2" fill="#6B4EFF" opacity="0.3"/>
-              <circle cx="450" cy="570" r="3" fill="#6B4EFF" opacity="0.3"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TA Questions Section -->
-    <section class="py-16 sdij-section">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Illustration -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <!-- Top Text (Above Image) -->
-            <div class="mb-6">
-              <p class="text-lg font-semibold text-gray-800">
-                올 한 해, 학생들이 TA에게 얼마나 많은 질문을 했을까요?
-              </p>
-            </div>
-            
-            <!-- Image Container with Relative Positioning -->
-            <div style="position: relative; display: inline-block; max-width: 500px; max-height: 600px;">
-              <img src="TA 총 질문 수.png" alt="TA Questions Illustration" class="mx-auto max-w-full h-auto" style="max-width: 500px; max-height: 600px;">
-              
-              <!-- Dynamic Data Overlay on the Card (총 질문 수만) -->
-              <div style="position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; color: #000000; white-space: nowrap; pointer-events: none;">
-                <div style="text-align: center;">
-                  <div style="margin-bottom: 5px;">총 질문 수</div>
-                  <div style="font-size: 32px; font-weight: bold; letter-spacing: 1px;">
-                    <span id="taOverlayQuestions">0</span>개
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Caption Text (Below Image) -->
-            <div class="mt-6">
-              <p class="text-base text-gray-700">
-                총 <span class="font-bold" style="color: #002B5C;" id="taOverlayStudents">0</span>명의 학생과 
-                <span class="font-bold" style="color: #002B5C;" id="taOverlayQuestions2">0</span>개의 질문을 하며 달려왔습니다.
-              </p>
-            </div>
-          </div>
-          
-          <!-- TA vs SA Comparison Card -->
-          <div class="sdij-card p-8 mb-12" data-aos="fade-up" data-aos-delay="100" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <!-- Image Container with Relative Positioning -->
-            <div class="flex justify-center">
-              <div style="position: relative; display: inline-block; max-width: 500px; max-height: 400px;">
-                <img src="TA vs SA.png" alt="TA vs SA Comparison" class="mx-auto max-w-full h-auto" style="max-width: 500px; max-height: 400px;">
-                
-                <!-- Dynamic Data Overlay for TA Meet Box -->
-                <div style="position: absolute; top: 55%; left: 25%; transform: translate(-50%, -50%); font-family: Arial, sans-serif; font-size: 18px; font-weight: 700; color: #000000; white-space: nowrap; pointer-events: none;">
-                  <span id="taMeetCountOverlay">12</span>
-                </div>
-                
-                <!-- Dynamic Data Overlay for SA Box -->
-                <div style="position: absolute; top: 55%; left: 75%; transform: translate(-50%, -50%); font-family: Arial, sans-serif; font-size: 18px; font-weight: 700; color: #000000; white-space: nowrap; pointer-events: none;">
-                  <span id="saCountOverlay">8</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Caption Text (Separate from Image) -->
-            <div class="mt-6 text-center">
-              <p class="text-sm text-gray-700 leading-relaxed">
-                그 중, TA Meet는 <span class="font-bold" style="color: #FF8C00;" id="captionTaMeet">12</span>번, SA는 <span class="font-bold" style="color: #4F46E5;" id="captionSa">8</span>회 상담이 진행되었습니다.<br>
-                그 중, <span class="font-bold" style="color: #FF4444;" id="captionWinner">TA Meet</span> 이용자 수가 더 많았네요!
-              </p>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-
-
-
-
-
-
-    <!-- Subject Questions Chart Section -->
-    <section class="py-16 sdij-section-alt">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Section Title -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">과목별 질문 현황</h2>
-            <p class="sdij-subtitle">각 과목별로 질문한 문제 수를 확인할 수 있습니다</p>
-          </div>
-          
-          <!-- Chart Illustration -->
-          <div class="sdij-card p-8 mb-12" data-aos="fade-up" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <svg width="500" height="600" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" class="mx-auto max-w-full h-auto" style="max-width: 600px;">
-              <!-- Background -->
-              <rect width="500" height="600" fill="#FFFFFF"/>
-              
-              <!-- Title -->
-              <text x="250" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#002B5C">
-                과목별 질문 현황
-              </text>
-              
-              <!-- Chart Container -->
-              <rect x="60" y="80" width="420" height="335" rx="8" fill="#FAFAFA" stroke="#E5E7EB" stroke-width="1"/>
-              
-              <!-- Grid Lines (Horizontal) -->
-              <line x1="60" y1="90" x2="480" y2="90" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="142.5" x2="480" y2="142.5" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="195" x2="480" y2="195" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="247.5" x2="480" y2="247.5" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="300" x2="480" y2="300" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="352.5" x2="480" y2="352.5" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="405" x2="480" y2="405" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              
-              <!-- Y-axis Labels (왼쪽) -->
-              <text x="55" y="95" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">100</text>
-              <text x="55" y="147.5" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">75</text>
-              <text x="55" y="200" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">50</text>
-              <text x="55" y="252.5" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">25</text>
-              <text x="55" y="305" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#9CA3AF">0</text>
-              
-              <!-- Bar 1: 국어 (Vertical) -->
-              <text x="120" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#002B5C">국어</text>
-              <rect x="85" y="405" width="70" height="0" rx="4" fill="#002B5C" opacity="0.9" id="koreanQuestionBar"/>
-              <text x="120" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#002B5C" id="koreanQuestionsLabel">0</text>
-              
-              <!-- Bar 2: 수학 (Vertical) -->
-              <text x="200" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#002B5C">수학</text>
-              <rect x="165" y="405" width="70" height="0" rx="4" fill="#002B5C" opacity="0.9" id="mathQuestionBar"/>
-              <text x="200" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#002B5C" id="mathQuestionsLabel">0</text>
-              
-              <!-- Bar 3: 영어 (Vertical) -->
-              <text x="280" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#002B5C">영어</text>
-              <rect x="245" y="405" width="70" height="0" rx="4" fill="#002B5C" opacity="0.9" id="englishQuestionBar"/>
-              <text x="280" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#002B5C" id="englishQuestionsLabel">0</text>
-              
-              <!-- Bar 4: 탐구 제1선택 (Vertical) -->
-              <text x="360" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="500" fill="#002B5C">탐구1</text>
-              <rect x="325" y="405" width="70" height="0" rx="4" fill="#002B5C" opacity="0.9" id="explore1QuestionBar"/>
-              <text x="360" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#002B5C" id="explore1QuestionsLabel">0</text>
-              
-              <!-- Bar 5: 탐구 제2선택 (Vertical) -->
-              <text x="440" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="500" fill="#002B5C">탐구2</text>
-              <rect x="405" y="405" width="70" height="0" rx="4" fill="#002B5C" opacity="0.9" id="explore2QuestionBar"/>
-              <text x="440" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#002B5C" id="explore2QuestionsLabel">0</text>
-              
-              <!-- Caption Text -->
-              <text x="250" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#374151">
-                <tspan x="250" dy="0">그 중, <tspan font-weight="700" fill="#002B5C">국어 <tspan id="captionKoreanQuestions">0</tspan></tspan>문제, <tspan font-weight="700" fill="#002B5C">수학 <tspan id="captionMathQuestions">0</tspan></tspan>문제,</tspan>
-                <tspan x="250" dy="20"><tspan font-weight="700" fill="#002B5C">영어 <tspan id="captionEnglishQuestions">0</tspan></tspan>문제, <tspan font-weight="700" fill="#002B5C">탐구 제1선택 <tspan id="captionExplore1Questions">0</tspan></tspan>문제,</tspan>
-                <tspan x="250" dy="20"><tspan font-weight="700" fill="#002B5C">탐구 제2선택 <tspan id="captionExplore2Questions">0</tspan></tspan>문제 만큼 풀었습니다.</tspan>
-              </text>
-              
-              <!-- Decorative elements -->
-              <circle cx="60" cy="60" r="3" fill="#002B5C" opacity="0.4"/>
-              <circle cx="440" cy="65" r="2.5" fill="#002B5C" opacity="0.3"/>
-              <circle cx="50" cy="560" r="2" fill="#002B5C" opacity="0.3"/>
-              <circle cx="450" cy="570" r="3" fill="#002B5C" opacity="0.3"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Monthly Question Trends Chart Section -->
-    <section class="py-16 sdij-section">
-      <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto">
-          <!-- Section Title -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold sdij-title mb-4">월별 질문 추이 분석</h2>
-            <p class="sdij-subtitle">선택한 과목들의 월별 질문 패턴을 확인할 수 있습니다</p>
-          </div>
-          
-          <!-- Chart Illustration -->
-          <div class="sdij-card p-8 mb-12" data-aos="fade-up" style="background: #FFFFFF; border: 1px solid #E5E7EB;">
-            <svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" class="mx-auto max-w-full h-auto">
-              <!-- Background -->
-              <rect width="500" height="400" fill="#FFFFFF"/>
-              
-              <!-- Title -->
-              <text x="250" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#002B5C">
-                월별 질문 추이 분석
-              </text>
-              
-              <!-- Chart Container -->
-              <rect x="60" y="60" width="380" height="250" rx="8" fill="#FAFAFA" stroke="#E5E7EB" stroke-width="1"/>
-              
-              <!-- Grid Lines (Vertical - Months) -->
-              <line x1="100" y1="60" x2="100" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="140" y1="60" x2="140" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="180" y1="60" x2="180" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="220" y1="60" x2="220" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="260" y1="60" x2="260" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="300" y1="60" x2="300" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="340" y1="60" x2="340" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="380" y1="60" x2="380" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="420" y1="60" x2="420" y2="310" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              
-              <!-- Grid Lines (Horizontal - Question Count) -->
-              <line x1="60" y1="100" x2="440" y2="100" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="140" x2="440" y2="140" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="180" x2="440" y2="180" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="220" x2="440" y2="220" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="260" x2="440" y2="260" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              <line x1="60" y1="300" x2="440" y2="300" stroke="#E5E7EB" stroke-width="1" opacity="0.5"/>
-              
-              <!-- Y-axis Labels -->
-              <text x="50" y="105" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">50</text>
-              <text x="50" y="145" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">40</text>
-              <text x="50" y="185" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">30</text>
-              <text x="50" y="225" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">20</text>
-              <text x="50" y="265" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">10</text>
-              <text x="50" y="305" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">0</text>
-              
-              <!-- X-axis Labels (Months) -->
-              <text x="100" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">1월</text>
-              <text x="140" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">2월</text>
-              <text x="180" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">3월</text>
-              <text x="220" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">4월</text>
-              <text x="260" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">5월</text>
-              <text x="300" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">6월</text>
-              <text x="340" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">7월</text>
-              <text x="380" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">8월</text>
-              <text x="420" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#9CA3AF">9월</text>
-              
-              <!-- Math Line (Purple) -->
-              <path d="M 100,280 Q 140,260 180,240 Q 220,220 260,200 Q 300,180 340,160 Q 380,140 420,120" 
-                    stroke="#8B5CF6" stroke-width="3" fill="none" id="mathTrendLine"/>
-              <!-- Math Data Points -->
-              <circle cx="100" cy="280" r="4" fill="#8B5CF6"/>
-              <circle cx="140" cy="260" r="4" fill="#8B5CF6"/>
-              <circle cx="180" cy="240" r="4" fill="#8B5CF6"/>
-              <circle cx="220" cy="220" r="4" fill="#8B5CF6"/>
-              <circle cx="260" cy="200" r="4" fill="#8B5CF6"/>
-              <circle cx="300" cy="180" r="4" fill="#8B5CF6"/>
-              <circle cx="340" cy="160" r="4" fill="#8B5CF6"/>
-              <circle cx="380" cy="140" r="4" fill="#8B5CF6"/>
-              <circle cx="420" cy="120" r="4" fill="#8B5CF6"/>
-              
-              <!-- Explore1 Line (Sky Blue) -->
-              <path d="M 100,300 Q 140,280 180,260 Q 220,240 260,220 Q 300,200 340,180 Q 380,160 420,140" 
-                    stroke="#0EA5E9" stroke-width="3" fill="none" id="explore1TrendLine"/>
-              <!-- Explore1 Data Points -->
-              <circle cx="100" cy="300" r="4" fill="#0EA5E9"/>
-              <circle cx="140" cy="280" r="4" fill="#0EA5E9"/>
-              <circle cx="180" cy="260" r="4" fill="#0EA5E9"/>
-              <circle cx="220" cy="240" r="4" fill="#0EA5E9"/>
-              <circle cx="260" cy="220" r="4" fill="#0EA5E9"/>
-              <circle cx="300" cy="200" r="4" fill="#0EA5E9"/>
-              <circle cx="340" cy="180" r="4" fill="#0EA5E9"/>
-              <circle cx="380" cy="160" r="4" fill="#0EA5E9"/>
-              <circle cx="420" cy="140" r="4" fill="#0EA5E9"/>
-              
-              <!-- Explore2 Line (Orange) -->
-              <path d="M 100,310 Q 140,290 180,270 Q 220,250 260,230 Q 300,210 340,190 Q 380,170 420,150" 
-                    stroke="#F97316" stroke-width="3" fill="none" id="explore2TrendLine"/>
-              <!-- Explore2 Data Points -->
-              <circle cx="100" cy="310" r="4" fill="#F97316"/>
-              <circle cx="140" cy="290" r="4" fill="#F97316"/>
-              <circle cx="180" cy="270" r="4" fill="#F97316"/>
-              <circle cx="220" cy="250" r="4" fill="#F97316"/>
-              <circle cx="260" cy="230" r="4" fill="#F97316"/>
-              <circle cx="300" cy="210" r="4" fill="#F97316"/>
-              <circle cx="340" cy="190" r="4" fill="#F97316"/>
-              <circle cx="380" cy="170" r="4" fill="#F97316"/>
-              <circle cx="420" cy="150" r="4" fill="#F97316"/>
-              
-              <!-- Legend -->
-              <g transform="translate(70, 350)">
-                <!-- Math Legend -->
-                <line x1="0" y1="0" x2="20" y2="0" stroke="#8B5CF6" stroke-width="3"/>
-                <text x="25" y="5" font-family="Arial, sans-serif" font-size="12" fill="#8B5CF6">수학</text>
-                
-                <!-- Explore1 Legend -->
-                <line x1="80" y1="0" x2="100" y2="0" stroke="#0EA5E9" stroke-width="3"/>
-                <text x="105" y="5" font-family="Arial, sans-serif" font-size="12" fill="#0EA5E9">탐구1</text>
-                
-                <!-- Explore2 Legend -->
-                <line x1="160" y1="0" x2="180" y2="0" stroke="#F97316" stroke-width="3"/>
-                <text x="185" y="5" font-family="Arial, sans-serif" font-size="12" fill="#F97316">탐구2</text>
-              </g>
-              
-              <!-- Caption -->
-              <text x="250" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="500" fill="#374151">
-                <tspan x="250" dy="0">학생 데이터님과 함께 수학, 탐구1, 탐구2를 선택한 학생들은</tspan>
-                <tspan x="250" dy="18">월별로 이런 질문 수 추이를 보였습니다. 꾸준하게 질문하며 학습하였네요!</tspan>
-              </text>
-              
-              <!-- Decorative elements -->
-              <circle cx="70" cy="50" r="3" fill="#8B5CF6" opacity="0.3"/>
-              <circle cx="430" cy="55" r="2.5" fill="#0EA5E9" opacity="0.3"/>
-              <circle cx="60" cy="370" r="2" fill="#F97316" opacity="0.3"/>
-              <circle cx="440" cy="375" r="3" fill="#8B5CF6" opacity="0.3"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Scroll to Top Button -->
-  <div class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
-    <i class="fas fa-arrow-up"></i>
-  </div>
-
-  <!-- Footer -->
-  <footer class="sdij-footer text-white py-8">
-    <div class="container mx-auto px-6 text-center">
-      <div class="mb-4">
-        <div class="w-12 h-12 sdij-gradient rounded-xl flex items-center justify-center mx-auto mb-4">
-          <i class="fas fa-graduation-cap text-white text-xl"></i>
-        </div>
-        <h3 class="text-xl font-bold mb-2">Memoir</h3>
-        <p class="text-gray-400">시대인재 학생 성취 대시보드</p>
-      </div>
-      <div class="border-t border-gray-700 pt-4">
-        <p class="text-gray-400 text-sm">© 2024 시대인재. All rights reserved.</p>
+        
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- Scripts -->
+  <!-- Check-in/Check-out Section (등하원 시간) -->
+  <section class="py-16" style="background: #FFFFFF;">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Two Boxes Side by Side -->
+        <div class="flex gap-4 mb-6" data-aos="fade-up">
+          <!-- Check-in Box (Sun) -->
+          <div class="check-in-out-box">
+            <div class="sun-icon">☀️</div>
+            <div class="text-center">
+              <div class="time-label">평균 등원 시간</div>
+              <div class="time-value" id="checkInTime">08:30</div>
+            </div>
+          </div>
+          
+          <!-- Check-out Box (Moon) -->
+          <div class="check-in-out-box">
+            <div class="moon-icon">🌙</div>
+            <div class="text-center">
+              <div class="time-label">평균 하원 시간</div>
+              <div class="time-value" id="checkOutTime">22:00</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Caption -->
+        <div class="text-center text-gray-700 mt-4" data-aos="fade-up" data-aos-delay="100">
+          <p class="text-lg">
+            <span id="captionStudentName" class="font-semibold">홍길동</span>님은, 평균적으로 라이브러리에 <span id="captionCheckInTime" class="font-semibold">08:30</span>에 등원하여, <span id="captionCheckOutTime" class="font-semibold">22:00</span>에 하원하였습니다.
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Total Hours Section (강의 시간) -->
+  <section class="py-16" style="background: #FFFFFF;">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Hours Card -->
+        <div class="hours-card mb-6" data-aos="fade-up">
+          <!-- Header with Title and Number -->
+          <div class="hours-header">
+            <div class="hours-title">시대인재 강의실에서,<br>강의를 들으며 보낸 시간</div>
+            <div class="hours-number-section">
+              <div class="flex items-end gap-2">
+                <span class="hours-number" id="totalHours">1200</span>
+                <span class="hours-text">시간</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Classroom Image -->
+          <img src="강의실 사진.png" alt="강의실" class="classroom-image">
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- AOS Initialization -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Initialize AOS
     AOS.init({
       duration: 800,
       easing: 'ease-in-out',
-      once: true,
-      offset: 100
+      once: true
     });
-
-    // Scroll to top functionality
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-
-    // Show/hide scroll to top button
-    window.addEventListener('scroll', function() {
-      const scrollToTopBtn = document.getElementById('scrollToTop');
-      if (window.pageYOffset > 300) {
-        scrollToTopBtn.classList.add('visible');
-      } else {
-        scrollToTopBtn.classList.remove('visible');
-      }
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Glide Template Column 쿼리스트링 읽기 로직 (기존 코드 유지)
+    
+    // URL 파라미터 읽기
     const params = new URLSearchParams(location.search);
-    const get = (k,d='') => {
-      const value = params.get(k) || d;
-      // 디버깅을 위한 로그
-      console.log(`Parameter ${k}:`, value);
-      // JSON 형태의 데이터를 파싱하여 실제 값 추출
-      try {
-        if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
-          const parsed = JSON.parse(value);
-          // 객체에서 첫 번째 값을 추출 (예: {"캠퍼스_학생수":1500} -> 1500)
-          return Object.values(parsed)[0] || value;
-        }
-      } catch (e) {
-        // JSON 파싱 실패시 원본 값 반환
-      }
-      return value;
+    const get = (key, defaultValue = '') => {
+      return params.get(key) || defaultValue;
     };
-    const set = (id,key,suffix='') => {
-      const el=document.getElementById(id);
-      const value = get(key) + suffix;
-      console.log(`Setting ${id}:`, value, 'Element found:', !!el);
-      if(el) el.textContent = value;
-    };
-    set('name','name');
-    set('campus','campus');
-    set('className','class');
-    // 캠퍼스와 반명은 이미 위에서 바인딩됨
-    set('totalStudents','totalStudents','명');
-    set('campusStudents','campusStudents','명');
-    set('classStudents','classStudents','명');
-    set('days','days','일');
-    set('meals','meals','끼니');
-    set('menu','menu');
-    set('time','time','시간');
-    set('self','self','시간');
-    set('classTime','classTime','시간');
-    set('totalAsk','totalAsk','개');
-    set('personalAsk','personalAsk','개');
-    set('start','start');
-    set('end','end');
-    set('focus','focus');
-    set('korSimul','korSimul'); set('korTotal','korTotal');
-    set('mathSimul','mathSimul'); set('mathTotal','mathTotal');
-    set('engSimul','engSimul'); set('engTotal','engTotal');
-    set('bioSimul','bioSimul'); set('bioTotal','bioTotal');
-    set('geoSimul','geoSimul'); set('geoTotal','geoTotal');
-    set('totalQ','totalQ','문제');
     
-    // Timeline Section Data
-    set('startDate','startDate');
-    set('endDate','endDate');
-    // totalDays는 days 데이터에서 숫자만 추출하여 사용
-    const daysValue = get('days');
-    const daysNumber = daysValue.replace('일', '');
-    const totalDaysEl = document.getElementById('totalDays');
-    if(totalDaysEl) totalDaysEl.textContent = daysNumber;
+    // Dynamic data binding
+    const studentName = get('name', '학생 이름');
+    const startDate = get('startDate', '2024.02.15');
+    const endDate = get('endDate', '2024.11.13');
+    const totalDays = get('totalDays', '150');
+    const campusName = get('campusName', '고사관');
+    const className = get('className', 'N반');
+    const checkInTime = get('checkInTime', '08:30');
+    const checkOutTime = get('checkOutTime', '22:00');
+    const totalHours = get('totalHours', '1200');
     
-    // Additional Text Section (Summary) Data
-    set('summaryName','name');
-    set('summaryTotalStudents','totalStudents');
-    set('summaryCampusStudents','campusStudents');
-    set('summaryCampus','campus');
-    set('summaryClassName','class');
-    set('summaryClassStudents','classStudents');
+    // Update DOM elements
+    document.getElementById('studentNameOutput').textContent = studentName;
+    document.getElementById('startDate').textContent = startDate;
+    document.getElementById('endDate').textContent = endDate;
+    document.getElementById('totalDays').textContent = totalDays;
+    document.getElementById('campusNameOutput').textContent = campusName;
+    document.getElementById('classNameOutput').textContent = className;
     
-    // Total Hours Block Data
-    set('totalHours','time'); // 총 공부시간
-    set('studyTimeText','time'); // SVG 내부 공부시간 (책상 위 종이)
-    set('studyTimeCaption','time'); // SVG 내부 캡션 공부시간
-    set('cohortStudents','totalStudents'); // 코호트 학생 수
+    // Update check-in/check-out times
+    document.getElementById('checkInTime').textContent = checkInTime;
+    document.getElementById('checkOutTime').textContent = checkOutTime;
+    document.getElementById('captionStudentName').textContent = studentName;
+    document.getElementById('captionCheckInTime').textContent = checkInTime;
+    document.getElementById('captionCheckOutTime').textContent = checkOutTime;
     
-    // Study Time Illustration Section Data
-    set('studentName','name'); // 학생 이름
-    set('studyTimeCaption','libraryHours'); // 라이브러리 잔류 시간
-    set('overlayStudyTime','libraryHours'); // 이미지 위 오버레이 시간 데이터
-    // 코호트 총 시간 계산 (학생 수 * 800)
-    const cohortHoursEl = document.getElementById('cohortHours');
-    const totalStudentsValue = parseInt(get('totalStudents') || '0');
-    if(cohortHoursEl) cohortHoursEl.textContent = (totalStudentsValue * 800).toLocaleString();
-    
-    // Meal Section Data
-    set('totalMeals','meals'); // 총 끼니 수
-    set('favMeal','menu'); // 최애 메뉴
-    set('mealStudents','totalStudents'); // 식사 섹션 학생 수
-    set('mealCount','meals'); // 식사 섹션 끼니 수
-    set('mealCampus','campus'); // 식사 섹션 캠퍼스
-    set('mealFavFood','menu'); // 식사 섹션 최애 메뉴
-    
-    // TA Questions Section Data
-    set('taTotalQuestions','totalQuestions'); // TA 총 질문 수
-    set('taTotalStudents','totalStudents'); // TA 섹션 학생 수
-    set('taTotalQuestions2','totalQuestions'); // TA 섹션 질문 수 (하단 텍스트용)
-    // TA Image Overlay Data
-    set('taOverlayQuestions','totalQuestions'); // 이미지 위 오버레이 질문 수
-    set('taOverlayStudents','totalStudents'); // 이미지 위 오버레이 학생 수
-    set('taOverlayQuestions2','totalQuestions'); // 이미지 위 오버레이 질문 수 (캡션용)
-    
-    // TA vs SA Comparison Data
-    set('taMeetCount','taMeet'); // TA Meet 횟수
-    set('saCount','sa'); // SA 횟수
-    set('captionTaMeet','taMeet'); // 캡션용 TA Meet 횟수
-    set('captionSa','sa'); // 캡션용 SA 횟수
-    // TA vs SA Image Overlay Data
-    set('taMeetCountOverlay','taMeet'); // 이미지 위 오버레이 TA Meet 횟수
-    set('saCountOverlay','sa'); // 이미지 위 오버레이 SA 횟수
-    
-    // Calculate winner
-    const taMeetValue = parseInt(get('taMeet') || '12');
-    const saValue = parseInt(get('sa') || '8');
-    const winner = taMeetValue > saValue ? 'TA Meet' : 'SA';
-    const winnerEl = document.getElementById('captionWinner');
-    if(winnerEl) winnerEl.textContent = winner;
-    
-    // TA Additional Stats (calculated)
-    const totalQuestions = parseInt(get('totalQuestions') || '0');
-    const totalStudents = parseInt(get('totalStudents') || '1');
-    const avgQuestions = totalQuestions > 0 ? Math.round(totalQuestions / totalStudents) : 0;
-    
-    const avgQuestionsEl = document.getElementById('avgQuestionsPerStudent');
-    if(avgQuestionsEl) avgQuestionsEl.textContent = avgQuestions.toLocaleString();
-    
-    // Most Active Month (placeholder - could be connected to actual data)
-    const mostActiveMonthEl = document.getElementById('mostActiveMonth');
-    if(mostActiveMonthEl) mostActiveMonthEl.textContent = '11';
-    
-    // Popular Question Type (placeholder - could be connected to actual data)
-    const popularQuestionTypeEl = document.getElementById('popularQuestionType');
-    if(popularQuestionTypeEl) popularQuestionTypeEl.textContent = '수학';
-    
-    // Check-in/Check-out Section Data
-    set('avgCheckIn','checkIn'); // 평균 등원 시간
-    set('avgCheckOut','checkOut'); // 평균 하원 시간
-    set('checkInName','name'); // 출결 섹션 학생 이름
-    set('checkInTime','checkIn'); // 캡션용 등원 시간
-    set('checkOutTime','checkOut'); // 캡션용 하원 시간
-    
-    // Focus Score Section Data
-    const avgFocus = parseInt(get('focusAvg') || '75');
-    const minFocus = parseInt(get('focusMin') || '0');
-    const maxFocus = parseInt(get('focusMax') || '100');
-    
-    set('avgFocusScore', 'focusAvg'); // 평균 몰입도
-    set('minFocusScore', 'focusMin'); // 최소 몰입도
-    set('maxFocusScore', 'focusMax'); // 최대 몰입도
-    set('captionMinFocus', 'focusMin'); // 캡션용 최소
-    set('captionMaxFocus', 'focusMax'); // 캡션용 최대
-    set('captionAvgFocus', 'focusAvg'); // 캡션용 평균
-    
-    // Update gauge arc and pointer based on focus score
-    const gaugeProgress = document.getElementById('gaugeProgress');
-    const gaugePointer = document.getElementById('gaugePointer');
-    
-    if(gaugeProgress && gaugePointer) {
-      // Calculate angle (0-100 maps to 0-180 degrees)
-      const percentage = Math.min(Math.max(avgFocus, 0), 100);
-      const angle = (percentage / 100) * 180;
-      
-      // Calculate arc path
-      const startX = 80;
-      const startY = 250;
-      const radius = 120;
-      const endAngle = angle * (Math.PI / 180);
-      const endX = 200 - radius * Math.cos(endAngle);
-      const endY = 250 - radius * Math.sin(endAngle);
-      const largeArcFlag = angle > 180 ? 1 : 0;
-      
-      const arcPath = `M ${startX} ${startY} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`;
-      gaugeProgress.setAttribute('d', arcPath);
-      
-      // Update pointer rotation (0 degrees = left, 180 degrees = right)
-      const pointerAngle = -90 + angle; // Start from left (-90) and rotate
-      gaugePointer.setAttribute('transform', `rotate(${pointerAngle} 200 250)`);
-    }
-    
-    // Solved Problems Section Data
-    set('solvedProblems','survival'); // 푼 서바이벌 문제 수
-    set('solvedStudentName','name'); // 학생 이름
-    set('contentName','contentType'); // 콘텐츠 이름 (서바이벌 등)
-    set('totalSolved','survival'); // 총 푼 문제 수
-    
-    // Subjects Chart Data (Problem Count)
-    const koreanProblems = parseInt(get('koreanProblems') || '50');
-    const mathProblems = parseInt(get('mathProblems') || '60');
-    const englishProblems = parseInt(get('englishProblems') || '70');
-    const explore1Problems = parseInt(get('explore1Problems') || '40');
-    const explore2Problems = parseInt(get('explore2Problems') || '45');
-    
-    // Update text values
-    set('koreanSolved', 'koreanProblems');
-    set('mathSolved', 'mathProblems');
-    set('englishSolved', 'englishProblems');
-    set('explore1Solved', 'explore1Problems');
-    set('explore2Solved', 'explore2Problems');
-    
-    // Update caption values
-    set('captionKorean', 'koreanProblems');
-    set('captionMath', 'mathProblems');
-    set('captionEnglish', 'englishProblems');
-    set('captionExplore1', 'explore1Problems');
-    set('captionExplore2', 'explore2Problems');
-    
-    // Update bar widths (max 100 problems = 320px width)
-    const maxWidth = 320;
-    const maxValue = 100;
-    
-    const koreanBar = document.getElementById('koreanBar');
-    const mathBar = document.getElementById('mathBar');
-    const englishBar = document.getElementById('englishBar');
-    const explore1Bar = document.getElementById('explore1Bar');
-    const explore2Bar = document.getElementById('explore2Bar');
-    
-    if(koreanBar) koreanBar.setAttribute('width', (koreanProblems / maxValue * maxWidth).toString());
-    if(mathBar) mathBar.setAttribute('width', (mathProblems / maxValue * maxWidth).toString());
-    if(englishBar) englishBar.setAttribute('width', (englishProblems / maxValue * maxWidth).toString());
-    if(explore1Bar) explore1Bar.setAttribute('width', (explore1Problems / maxValue * maxWidth).toString());
-    if(explore2Bar) explore2Bar.setAttribute('width', (explore2Problems / maxValue * maxWidth).toString());
-
-    // Subject Questions Chart Data
-    const koreanQuestions = parseInt(get('koreanQuestions') || '30');
-    const mathQuestions = parseInt(get('mathQuestions') || '40');
-    const englishQuestions = parseInt(get('englishQuestions') || '35');
-    const explore1Questions = parseInt(get('explore1Questions') || '25');
-    const explore2Questions = parseInt(get('explore2Questions') || '20');
-    
-    // Update question text values
-    set('koreanQuestions', 'koreanQuestions');
-    set('mathQuestions', 'mathQuestions');
-    set('englishQuestions', 'englishQuestions');
-    set('explore1Questions', 'explore1Questions');
-    set('explore2Questions', 'explore2Questions');
-    
-    // Update question caption values
-    set('captionKoreanQuestions', 'koreanQuestions');
-    set('captionMathQuestions', 'mathQuestions');
-    set('captionEnglishQuestions', 'englishQuestions');
-    set('captionExplore1Questions', 'explore1Questions');
-    set('captionExplore2Questions', 'explore2Questions');
-    
-    // Update question bar heights (max 100 questions = 315px height, y starts at 405 and grows upward to 90)
-    const maxBarHeight = 315; // Max height from y=90 to y=405
-    const maxQuestionsValue = 100;
-    
-    const koreanQuestionBar = document.getElementById('koreanQuestionBar');
-    const mathQuestionBar = document.getElementById('mathQuestionBar');
-    const englishQuestionBar = document.getElementById('englishQuestionBar');
-    const explore1QuestionBar = document.getElementById('explore1QuestionBar');
-    const explore2QuestionBar = document.getElementById('explore2QuestionBar');
-    
-    // Calculate heights
-    const koreanHeight = (koreanQuestions / maxQuestionsValue * maxBarHeight);
-    const mathHeight = (mathQuestions / maxQuestionsValue * maxBarHeight);
-    const englishHeight = (englishQuestions / maxQuestionsValue * maxBarHeight);
-    const explore1Height = (explore1Questions / maxQuestionsValue * maxBarHeight);
-    const explore2Height = (explore2Questions / maxQuestionsValue * maxBarHeight);
-
-    if(koreanQuestionBar) {
-      koreanQuestionBar.setAttribute('height', koreanHeight.toString());
-      koreanQuestionBar.setAttribute('y', (405 - koreanHeight).toString());
-      const koreanLabel = document.getElementById('koreanQuestionsLabel');
-      if(koreanLabel) {
-        koreanLabel.setAttribute('y', (405 - koreanHeight - 5).toString());
-        koreanLabel.textContent = koreanQuestions.toString();
-      }
-    }
-    if(mathQuestionBar) {
-      mathQuestionBar.setAttribute('height', mathHeight.toString());
-      mathQuestionBar.setAttribute('y', (405 - mathHeight).toString());
-      const mathLabel = document.getElementById('mathQuestionsLabel');
-      if(mathLabel) {
-        mathLabel.setAttribute('y', (405 - mathHeight - 5).toString());
-        mathLabel.textContent = mathQuestions.toString();
-      }
-    }
-    if(englishQuestionBar) {
-      englishQuestionBar.setAttribute('height', englishHeight.toString());
-      englishQuestionBar.setAttribute('y', (405 - englishHeight).toString());
-      const englishLabel = document.getElementById('englishQuestionsLabel');
-      if(englishLabel) {
-        englishLabel.setAttribute('y', (405 - englishHeight - 5).toString());
-        englishLabel.textContent = englishQuestions.toString();
-      }
-    }
-    if(explore1QuestionBar) {
-      explore1QuestionBar.setAttribute('height', explore1Height.toString());
-      explore1QuestionBar.setAttribute('y', (405 - explore1Height).toString());
-      const explore1Label = document.getElementById('explore1QuestionsLabel');
-      if(explore1Label) {
-        explore1Label.setAttribute('y', (405 - explore1Height - 5).toString());
-        explore1Label.textContent = explore1Questions.toString();
-      }
-    }
-    if(explore2QuestionBar) {
-      explore2QuestionBar.setAttribute('height', explore2Height.toString());
-      explore2QuestionBar.setAttribute('y', (405 - explore2Height).toString());
-      const explore2Label = document.getElementById('explore2QuestionsLabel');
-      if(explore2Label) {
-        explore2Label.setAttribute('y', (405 - explore2Height - 5).toString());
-        explore2Label.textContent = explore2Questions.toString();
-      }
-    }
+    // Update hours section
+    document.getElementById('totalHours').textContent = totalHours;
   </script>
 
 </body>
